@@ -1,0 +1,780 @@
+{
+  "href": "https://api.spotify.com/v1/users/amgitskriss/playlists?offset=0&limit=20",
+  "items": [
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1se1KdnGzkpEDO4hfgwsHR"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1se1KdnGzkpEDO4hfgwsHR",
+      "id": "1se1KdnGzkpEDO4hfgwsHR",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/459ffae325e45c2c7f3bbfa396e606e75788eaac",
+          "width": 640
+        }
+      ],
+      "name": "Scene of Action – Albumunknown",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxhN2M5MzVjMjVkOThiN2YyYjBhMjE3MGU4YzVjNzY4MDJjMzA5Mzgw",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1se1KdnGzkpEDO4hfgwsHR/tracks",
+        "total": 12
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1se1KdnGzkpEDO4hfgwsHR"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6DqmsAO7yJDRzM2WjYGJxQ"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6DqmsAO7yJDRzM2WjYGJxQ",
+      "id": "6DqmsAO7yJDRzM2WjYGJxQ",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/f9001327094fd25820c9c6603a9b48579f4a04e5",
+          "width": 640
+        }
+      ],
+      "name": "Caitlin Hart",
+      "owner": {
+        "display_name": "Caitlin Hart",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/caitlinhartxoxo"
+        },
+        "href": "https://api.spotify.com/v1/users/caitlinhartxoxo",
+        "id": "caitlinhartxoxo",
+        "type": "user",
+        "uri": "spotify:user:caitlinhartxoxo"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxjNjU5N2RlZGE1OTJkNzhkNmQ0ZDUxMDI0NTk0MWEzY2FmMzc3YmI1",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6DqmsAO7yJDRzM2WjYGJxQ/tracks",
+        "total": 12
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6DqmsAO7yJDRzM2WjYGJxQ"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5MFWhQq4CMXNFRhzvyjqQn"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5MFWhQq4CMXNFRhzvyjqQn",
+      "id": "5MFWhQq4CMXNFRhzvyjqQn",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/4ea93063d1bcbe5eae28cf1223dec25e68cc58ad537ce3f5d1fff4ab15df7c746c04c4d6c549632f5c0176b4cf9e77e6974e16657eed13bc46af8fccf7d4b621b042666dc0046514e7c47b998e67b146",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/4ea93063d1bcbe5eae28cf1223dec25e68cc58ad537ce3f5d1fff4ab15df7c746c04c4d6c549632f5c0176b4cf9e77e6974e16657eed13bc46af8fccf7d4b621b042666dc0046514e7c47b998e67b146",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/4ea93063d1bcbe5eae28cf1223dec25e68cc58ad537ce3f5d1fff4ab15df7c746c04c4d6c549632f5c0176b4cf9e77e6974e16657eed13bc46af8fccf7d4b621b042666dc0046514e7c47b998e67b146",
+          "width": 60
+        }
+      ],
+      "name": "iPhone Chill",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "NjYsNzBiZjUxNGYyNzU1MDJmYTQ2NDI2ZTQ2NDZlNjgwMDRiYTc1OGNjNg==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5MFWhQq4CMXNFRhzvyjqQn/tracks",
+        "total": 57
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5MFWhQq4CMXNFRhzvyjqQn"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0mE2MHJvMWbrXhq6JdCWez"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0mE2MHJvMWbrXhq6JdCWez",
+      "id": "0mE2MHJvMWbrXhq6JdCWez",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/2fe23859170d279143c7d10043973820416218f288829486f1c44a6b7f97399b9ce359518cfc6120a98784f4272d2d99ec0f0438a4402c47cd323fe2cb8512f948e1906f4b53ac5dbe8333a1b7d60cdd",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/2fe23859170d279143c7d10043973820416218f288829486f1c44a6b7f97399b9ce359518cfc6120a98784f4272d2d99ec0f0438a4402c47cd323fe2cb8512f948e1906f4b53ac5dbe8333a1b7d60cdd",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/2fe23859170d279143c7d10043973820416218f288829486f1c44a6b7f97399b9ce359518cfc6120a98784f4272d2d99ec0f0438a4402c47cd323fe2cb8512f948e1906f4b53ac5dbe8333a1b7d60cdd",
+          "width": 60
+        }
+      ],
+      "name": "iPhone Upbeat",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTAwLDRmYzJjZGQzYWVkOGFlY2QyYWIzNjlkYTlhNGQzZTQ3NjQxNWE3YjQ=",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0mE2MHJvMWbrXhq6JdCWez/tracks",
+        "total": 38
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0mE2MHJvMWbrXhq6JdCWez"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/7hurzbOfJPLydJRDku2dy2"
+      },
+      "href": "https://api.spotify.com/v1/playlists/7hurzbOfJPLydJRDku2dy2",
+      "id": "7hurzbOfJPLydJRDku2dy2",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/1eee833e629a47e9f55fe646132c15a454677bfb95f69abff2cfd0275ac9245c8bfe853780f662ccc470e8fd66c68760d80a8d5cb648671d24a397d0e0968dcdba22eecfd3eb978c74c704364a7cef51",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/1eee833e629a47e9f55fe646132c15a454677bfb95f69abff2cfd0275ac9245c8bfe853780f662ccc470e8fd66c68760d80a8d5cb648671d24a397d0e0968dcdba22eecfd3eb978c74c704364a7cef51",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/1eee833e629a47e9f55fe646132c15a454677bfb95f69abff2cfd0275ac9245c8bfe853780f662ccc470e8fd66c68760d80a8d5cb648671d24a397d0e0968dcdba22eecfd3eb978c74c704364a7cef51",
+          "width": 60
+        }
+      ],
+      "name": "iPhone Symphonic",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MjYsMTkzMDJhYzEwNGU4NTJiMzljYmQxNGM2ZDIyYTI1YTdkOTY3N2Q0ZQ==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/7hurzbOfJPLydJRDku2dy2/tracks",
+        "total": 16
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:7hurzbOfJPLydJRDku2dy2"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX1OY2Lp0bIPp"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX1OY2Lp0bIPp",
+      "id": "37i9dQZF1DX1OY2Lp0bIPp",
+      "images": [
+        {
+          "height": null,
+          "url": "https://pl.scdn.co/images/pl/default/9ae3b2c9828fb1b057c7ecd0e07aa357ccd42a44",
+          "width": null
+        }
+      ],
+      "name": "Monday Motivation",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTU1Njk4ODcxMywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX1OY2Lp0bIPp/tracks",
+        "total": 80
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DX1OY2Lp0bIPp"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX3XuTDjo5z5z"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX3XuTDjo5z5z",
+      "id": "37i9dQZF1DX3XuTDjo5z5z",
+      "images": [
+        {
+          "height": null,
+          "url": "https://pl.scdn.co/images/pl/default/41d775fec9346a2a7acd5d016cef2e532ec7ecfb",
+          "width": null
+        }
+      ],
+      "name": "Electronic Concentration",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTU1MDU4OTM2MywwMDAwMDAyZDAwMDAwMTY5MDY1NDA1OWYwMDAwMDE2ODk5OWQ1MGQz",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX3XuTDjo5z5z/tracks",
+        "total": 80
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DX3XuTDjo5z5z"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/4n1P6t8HdBw5Bfn40ImOsW"
+      },
+      "href": "https://api.spotify.com/v1/playlists/4n1P6t8HdBw5Bfn40ImOsW",
+      "id": "4n1P6t8HdBw5Bfn40ImOsW",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/9954259964072be0558901689e018d0d1deabad6",
+          "width": 640
+        }
+      ],
+      "name": "Epic Score – Vengeance - ES033",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxlNWM3MzBjMmZlNWM4ZDg0YmQ5MWY3MGQxNWFlMmVlZTg1NGRjYjM1",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/4n1P6t8HdBw5Bfn40ImOsW/tracks",
+        "total": 25
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:4n1P6t8HdBw5Bfn40ImOsW"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2ctsEGKoKCxJBxtCpaBXIf"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2ctsEGKoKCxJBxtCpaBXIf",
+      "id": "2ctsEGKoKCxJBxtCpaBXIf",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/790c2c05487329783e0bf0b50a1dbbb0ec965031",
+          "width": 640
+        }
+      ],
+      "name": "Izzy",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "NCxlOTkxNmMzM2RlOTQyMDAwMGUwNjE1NThhNWVjM2I2MTYzNDY3YTU0",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2ctsEGKoKCxJBxtCpaBXIf/tracks",
+        "total": 4
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2ctsEGKoKCxJBxtCpaBXIf"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6E2lTwVVBIJlVyzIHx0swt"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6E2lTwVVBIJlVyzIHx0swt",
+      "id": "6E2lTwVVBIJlVyzIHx0swt",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/0348e17ee3ac4c3a9cd0efc871daf53e776419be",
+          "width": 640
+        }
+      ],
+      "name": "RWBY",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "OSw3ZDBjNjc2YTZlNzEzZGUxYzgzOTc4NTJjNmRlYmQ0MGMwZGY0NGE1",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6E2lTwVVBIJlVyzIHx0swt/tracks",
+        "total": 7
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6E2lTwVVBIJlVyzIHx0swt"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2mvp6lo7Up4XBqiAo95ew0"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2mvp6lo7Up4XBqiAo95ew0",
+      "id": "2mvp6lo7Up4XBqiAo95ew0",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/0dc766645ff824cc56a39b760e3ab87bfdb34c7828206373fd2e3a13f17e0dfc02c5f5b5d2010fde856cfebd0aa2af063bc794b4814253b16adbd605ea141e23f9cac9e6b0178c4e2f6cb61c347157a7",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/0dc766645ff824cc56a39b760e3ab87bfdb34c7828206373fd2e3a13f17e0dfc02c5f5b5d2010fde856cfebd0aa2af063bc794b4814253b16adbd605ea141e23f9cac9e6b0178c4e2f6cb61c347157a7",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/0dc766645ff824cc56a39b760e3ab87bfdb34c7828206373fd2e3a13f17e0dfc02c5f5b5d2010fde856cfebd0aa2af063bc794b4814253b16adbd605ea141e23f9cac9e6b0178c4e2f6cb61c347157a7",
+          "width": 60
+        }
+      ],
+      "name": "Wherever You Will Go - Radio",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxmMmYyYTA1MWY0ZWM4ZjFlNjNhMWFkMzNhYWRlNTk4MzAyNTRmMWJm",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2mvp6lo7Up4XBqiAo95ew0/tracks",
+        "total": 120
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2mvp6lo7Up4XBqiAo95ew0"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/4m4nNAvfsp5EbPGIdW820D"
+      },
+      "href": "https://api.spotify.com/v1/playlists/4m4nNAvfsp5EbPGIdW820D",
+      "id": "4m4nNAvfsp5EbPGIdW820D",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/0a8e7a8bd760244451825ecd673d956d638df0f1",
+          "width": 640
+        }
+      ],
+      "name": "Dr. Horrible's Sing-Along Blog",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxiOThhYzFhNDAyMjIzMjA5NmZiYjJjM2E4NTAwYWFkMWY5NzhlODcz",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/4m4nNAvfsp5EbPGIdW820D/tracks",
+        "total": 14
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:4m4nNAvfsp5EbPGIdW820D"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0utPRJTwMsKBusP1KBDtlB"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0utPRJTwMsKBusP1KBDtlB",
+      "id": "0utPRJTwMsKBusP1KBDtlB",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/03fcf5c2e90efb26d85a2df19d26eba8de0501955a8ee1f84a4011aed9584d52c9298fbfbc66e449ce016cdd5791703564c64d98f2c7820a38de7c49d342c4128ecabaee33ac7284cc59a850bd4cba74",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/03fcf5c2e90efb26d85a2df19d26eba8de0501955a8ee1f84a4011aed9584d52c9298fbfbc66e449ce016cdd5791703564c64d98f2c7820a38de7c49d342c4128ecabaee33ac7284cc59a850bd4cba74",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/03fcf5c2e90efb26d85a2df19d26eba8de0501955a8ee1f84a4011aed9584d52c9298fbfbc66e449ce016cdd5791703564c64d98f2c7820a38de7c49d342c4128ecabaee33ac7284cc59a850bd4cba74",
+          "width": 60
+        }
+      ],
+      "name": "This Is Letting Go",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "Myw4OTJhNWY1NzNmYzg5NjMwOGIxYWMyMmJkNzEyNDdmMmRjNTQ1NWFi",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0utPRJTwMsKBusP1KBDtlB/tracks",
+        "total": 30
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0utPRJTwMsKBusP1KBDtlB"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1ArIltUIlowBX3utHYuF7u"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1ArIltUIlowBX3utHYuF7u",
+      "id": "1ArIltUIlowBX3utHYuF7u",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/72bf4f2a3ba5074efa2b299e07b08243757051cd",
+          "width": 640
+        }
+      ],
+      "name": "Kyle Landry – Works for Piano Vol. VI",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxiZWJiNzBjYjYzM2JlZTQ0MjdmNmZiOTkxOTk1ZTllMTM2ODkyZDdl",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1ArIltUIlowBX3utHYuF7u/tracks",
+        "total": 16
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1ArIltUIlowBX3utHYuF7u"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2FbZxiVhE9BhMgEBCamDWZ"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2FbZxiVhE9BhMgEBCamDWZ",
+      "id": "2FbZxiVhE9BhMgEBCamDWZ",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/5c8b639f152998f19c87797d1399368a147c8ba6",
+          "width": 640
+        }
+      ],
+      "name": "Chris Vrenna – American McGee's Alice",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MyxkNDRmOGJhNTgyODJiZjM3ZDk1MGY3NjI0Mzc2MzEyNDllYjIwODQ5",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2FbZxiVhE9BhMgEBCamDWZ/tracks",
+        "total": 20
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2FbZxiVhE9BhMgEBCamDWZ"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0lheZj8I3JmyIARRoKe7d1"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0lheZj8I3JmyIARRoKe7d1",
+      "id": "0lheZj8I3JmyIARRoKe7d1",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/5af5688b9d5cda92b887d7c119666ce15359b0ca",
+          "width": 640
+        }
+      ],
+      "name": "Steam Powered Giraffe – Album One",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MywzMTE5MGEwN2QwOTVlNWQ4MWNmZTNmYjhjZWU3MTY5ZTZmNWZiMDVi",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0lheZj8I3JmyIARRoKe7d1/tracks",
+        "total": 11
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0lheZj8I3JmyIARRoKe7d1"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0DXoY83tBvgWkd8QH49yAI"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0DXoY83tBvgWkd8QH49yAI",
+      "id": "0DXoY83tBvgWkd8QH49yAI",
+      "images": [
+        {
+          "height": null,
+          "url": "https://pl.scdn.co/images/pl/default/a74b8a23c1cc61d97eabbcade8b6e8a42ed49c16",
+          "width": null
+        }
+      ],
+      "name": "Acoustic Lounge - Chillout & Easy Listening",
+      "owner": {
+        "display_name": "Joe Vuong",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/lmljoe"
+        },
+        "href": "https://api.spotify.com/v1/users/lmljoe",
+        "id": "lmljoe",
+        "type": "user",
+        "uri": "spotify:user:lmljoe"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTgxMSxmMDI0ZWNiNmJmNjE5MGFhZjBlYzNmNjA0YTM3N2MxNDliZjVhMDAw",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0DXoY83tBvgWkd8QH49yAI/tracks",
+        "total": 105
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0DXoY83tBvgWkd8QH49yAI"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0CgRQHBaakZrcXFduFWkk7"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0CgRQHBaakZrcXFduFWkk7",
+      "id": "0CgRQHBaakZrcXFduFWkk7",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/705f6a474bbcf4af717ba05ca1d1d1f4f82fb52dcac7db9e654cfe0bd5911d5d641457e47173d76ecf52204e4853bab76ee053a7de88fdfc05cf2c64d5d266161f64142a623396fcd6ce18e538eca427",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/705f6a474bbcf4af717ba05ca1d1d1f4f82fb52dcac7db9e654cfe0bd5911d5d641457e47173d76ecf52204e4853bab76ee053a7de88fdfc05cf2c64d5d266161f64142a623396fcd6ce18e538eca427",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/705f6a474bbcf4af717ba05ca1d1d1f4f82fb52dcac7db9e654cfe0bd5911d5d641457e47173d76ecf52204e4853bab76ee053a7de88fdfc05cf2c64d5d266161f64142a623396fcd6ce18e538eca427",
+          "width": 60
+        }
+      ],
+      "name": "Underground",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTYsYWQ1NTc0ODJjNDA3MzJhM2FjZWQ4NzFkMDUxNDg1MGExMzEyYzQ0Mw==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0CgRQHBaakZrcXFduFWkk7/tracks",
+        "total": 13
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0CgRQHBaakZrcXFduFWkk7"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1fj7Em6IF0vOylNo8JEN1x"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1fj7Em6IF0vOylNo8JEN1x",
+      "id": "1fj7Em6IF0vOylNo8JEN1x",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/752e7638e24028f06c2902bb7c1e35837bdd78ff",
+          "width": 640
+        }
+      ],
+      "name": "Nathan Lanier – Halo 4: Forward Unto Dawn",
+      "owner": {
+        "display_name": "amgitskriss",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/amgitskriss"
+        },
+        "href": "https://api.spotify.com/v1/users/amgitskriss",
+        "id": "amgitskriss",
+        "type": "user",
+        "uri": "spotify:user:amgitskriss"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MiwwMDA0YzVlYTc4MmU2NWUxMmQ0ZmJjYzdjMWM1ZGNhM2YyODBhYzVh",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1fj7Em6IF0vOylNo8JEN1x/tracks",
+        "total": 21
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1fj7Em6IF0vOylNo8JEN1x"
+    },
+    {
+      "collaborative": false,
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/57UEG5kFvYqSZwyCLRQQFW"
+      },
+      "href": "https://api.spotify.com/v1/playlists/57UEG5kFvYqSZwyCLRQQFW",
+      "id": "57UEG5kFvYqSZwyCLRQQFW",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/16a11f48f234267820058442fe2861a241134ad3387d03c05bb0d7a201553de7e66b09600a69d2f851f36ff8461be004e9dcd7bf3a6e3317664be67b58b8c539bf7bc2d3d1b3bd3104adec36c339e759",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/16a11f48f234267820058442fe2861a241134ad3387d03c05bb0d7a201553de7e66b09600a69d2f851f36ff8461be004e9dcd7bf3a6e3317664be67b58b8c539bf7bc2d3d1b3bd3104adec36c339e759",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/16a11f48f234267820058442fe2861a241134ad3387d03c05bb0d7a201553de7e66b09600a69d2f851f36ff8461be004e9dcd7bf3a6e3317664be67b58b8c539bf7bc2d3d1b3bd3104adec36c339e759",
+          "width": 60
+        }
+      ],
+      "name": "Burnout Revenge Soundtrack",
+      "owner": {
+        "display_name": "Hayley Clare Lightfoot",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/lilhayley32"
+        },
+        "href": "https://api.spotify.com/v1/users/lilhayley32",
+        "id": "lilhayley32",
+        "type": "user",
+        "uri": "spotify:user:lilhayley32"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MzgsMGU0ZTlhYTY4MWI5YTY2NjJlZTUyMWFhNzExNTcwMWY5ZTU5NTI4Mg==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/57UEG5kFvYqSZwyCLRQQFW/tracks",
+        "total": 36
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:57UEG5kFvYqSZwyCLRQQFW"
+    }
+  ],
+  "limit": 20,
+  "next": "https://api.spotify.com/v1/users/amgitskriss/playlists?offset=20&limit=20",
+  "offset": 0,
+  "previous": null,
+  "total": 37
+}

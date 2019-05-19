@@ -8,6 +8,6 @@ namespace RepositoryContracts
     {
         List<Playlist> GetPlaylists(string username);
         List<TrackSummary> GetTrackList(string playlistID);
-        TrackFeatures GetTrackFeatures(Guid trackID);
+        List<TrackFeatures> GetTrackFeatures(List<string> trackIDs);
     }
 }

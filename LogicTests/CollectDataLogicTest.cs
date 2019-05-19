@@ -14,7 +14,7 @@ namespace LogicTests
         [Test]
         public void GetPlaylists()
         {
-            string token = "Bearer BQDEDHHGCjEeTLN_Ir1WePpytroZjSWE3IvaFbDDRffoXXGdqth1OEhaY-B_ht-UAmeI_PF_nV7TcrW02pQBoRez4SpsYholOPo_N-ZT2sGjrGB39cg_qBz2Lbzo1z6VKBBGFVVjrLmdHUaGP8E";
+            string token = "Bearer BQB8KITNnaNPyn2sXWzHF5o7zWm3J0Q1U1YuVO9SnRCdwLRG-9A6Jv7PLBnnychs6etQmPYpdjc2eVKmpxpUva-jTe6ljBYzGuEQVhyzWTgUfg_hBdqKGXXy20VGayX-YX8muomXcxtb7wkoSYk";
             ICollectDataLogic logic = new CollectDataLogic(token);
             List<Playlist> result = logic.GetPlaylists("AMGitsKriss");
             Assert.NotNull(result);
@@ -23,10 +23,20 @@ namespace LogicTests
         [Test]
         public void GetTracks()
         {
-            string token = "Bearer BQDEDHHGCjEeTLN_Ir1WePpytroZjSWE3IvaFbDDRffoXXGdqth1OEhaY-B_ht-UAmeI_PF_nV7TcrW02pQBoRez4SpsYholOPo_N-ZT2sGjrGB39cg_qBz2Lbzo1z6VKBBGFVVjrLmdHUaGP8E";
+            string token = "Bearer BQB8KITNnaNPyn2sXWzHF5o7zWm3J0Q1U1YuVO9SnRCdwLRG-9A6Jv7PLBnnychs6etQmPYpdjc2eVKmpxpUva-jTe6ljBYzGuEQVhyzWTgUfg_hBdqKGXXy20VGayX-YX8muomXcxtb7wkoSYk";
             ICollectDataLogic logic = new CollectDataLogic(token);
             List<string> playlists = new List<string>() { "5MFWhQq4CMXNFRhzvyjqQn", "0mE2MHJvMWbrXhq6JdCWez", "7hurzbOfJPLydJRDku2dy2" };
             HashSet<TrackSummary> result = logic.GetPlaylistTracks(playlists);
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public void GetTrackFeatures()
+        {
+            string token = "Bearer BQB8KITNnaNPyn2sXWzHF5o7zWm3J0Q1U1YuVO9SnRCdwLRG-9A6Jv7PLBnnychs6etQmPYpdjc2eVKmpxpUva-jTe6ljBYzGuEQVhyzWTgUfg_hBdqKGXXy20VGayX-YX8muomXcxtb7wkoSYk";
+            ICollectDataLogic logic = new CollectDataLogic(token);
+            List<string> trackIDs = new List<string>() { "7bX77sZFzgQlBGVIhNVDK5", "0xM88xobymkMgg46MStfnV", "5p9XWUdvbUzmPCukOmwoU3" };
+            List<TrackFeatures> result = logic.GetTrackFeatures(null);
             Assert.NotNull(result);
         }
 

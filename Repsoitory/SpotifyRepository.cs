@@ -48,10 +48,11 @@ namespace Repsoitory
         /// <summary>
         /// Takes a track ID and returns the track features. (danceability, energy, tempo, etc)
         /// </summary>
-        public TrackFeatures GetTrackFeatures(Guid trackID)
+        public List<TrackFeatures> GetTrackFeatures(List<string> trackIDs)
         {
-            // TODO - Get trackfeatures for a 
-            throw new NotImplementedException();
+            string query = $"audio-features?ids={string.Join(",", trackIDs)}";
+            JObject tracks = (JObject)Query(requestType.GET, query);
+            return tracks["audio_features"].ToObject<List<TrackFeatures>>();
         }
     }
 }

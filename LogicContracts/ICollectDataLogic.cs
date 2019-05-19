@@ -8,5 +8,6 @@ namespace LogicContracts
     {
         List<Playlist> GetPlaylists(string username);
         HashSet<TrackSummary> GetPlaylistTracks(List<string> playlistIDs);
+        List<TrackFeatures> GetTrackFeatures(List<TrackSummary> trackList);
     }
 }

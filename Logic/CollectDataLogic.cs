@@ -4,6 +4,7 @@ using RepositoryContracts;
 using Repsoitory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic
 {
@@ -15,6 +16,7 @@ namespace Logic
         {
             _repo = new SpotifyRepository(apiKey);
         }
+
         public List<Playlist> GetPlaylists(string username)
         {
             return _repo.GetPlaylists(username);
@@ -36,6 +38,17 @@ namespace Logic
             }
 
             return trackSet;
+        }
+
+        public List<TrackFeatures> GetTrackFeatures(List<TrackSummary> trackList)
+        {
+            List<string> trackIDs = trackList.Select(x => x.ID).ToList();
+            List<TrackFeatures> result = _repo.GetTrackFeatures(trackIDs);
+
+            // TODO - For each response, add a features object to the result list
+
+            return result;
+
         }
     }
 }

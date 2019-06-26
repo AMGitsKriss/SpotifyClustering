@@ -50,9 +50,19 @@ namespace Repsoitory
         /// </summary>
         public List<TrackFeatures> GetTrackFeatures(List<string> trackIDs)
         {
-            string query = $"audio-features?ids={string.Join(",", trackIDs)}";
-            JObject tracks = (JObject)Query(requestType.GET, query);
-            return tracks["audio_features"].ToObject<List<TrackFeatures>>();
+            List<TrackFeatures> tracks = new List<TrackFeatures>();
+            int batchSize = 100;
+
+            for (int i = 0; i < trackIDs.Count; i+= batchSize)
+            {
+                List<string> trackBatch = trackIDs.GetRange(i, Math.Min(batchSize, trackIDs.Count-i));
+                string query = $"audio-features?ids={string.Join(",", trackBatch)}";
+
+                JObject tempTracks = (JObject)Query(requestType.GET, query);
+                tracks.AddRange(tempTracks["audio_features"].ToObject<List<TrackFeatures>>());
+            }
+
+            return tracks;
         }
     }
 }

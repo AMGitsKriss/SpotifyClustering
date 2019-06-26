@@ -27,14 +27,14 @@ namespace Logic
         /// </summary>
         /// <param name="playlistIDs"></param>
         /// <returns>A collection of tracks with duplicates removed</returns>
-        public HashSet<TrackSummary> GetPlaylistTracks(List<string> playlistIDs)
+        public List<TrackSummary> GetPlaylistTracks(List<string> playlistIDs)
         {
-            HashSet<TrackSummary> trackSet = new HashSet<TrackSummary>();
+            List<TrackSummary> trackSet = new List<TrackSummary>();
 
             foreach (string id in playlistIDs)
             {
                 List<TrackSummary> playlistTracks = _repo.GetTrackList(id);
-                trackSet.UnionWith(playlistTracks);
+                trackSet.AddRange(playlistTracks);
             }
 
             return trackSet;
@@ -45,7 +45,12 @@ namespace Logic
             List<string> trackIDs = trackList.Select(x => x.ID).ToList();
             List<TrackFeatures> result = _repo.GetTrackFeatures(trackIDs);
 
-            // TODO - For each response, add a features object to the result list
+            foreach (var item in result)
+            {
+                TrackSummary itemSummary = trackList.First(x => x.ID.Equals(item.ID));
+                item.Name = itemSummary.Name;
+                item.Artist = itemSummary.Artist;
+            }
 
             return result;
 

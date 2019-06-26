@@ -7,7 +7,7 @@ namespace LogicContracts
     public interface ICollectDataLogic
     {
         List<Playlist> GetPlaylists(string username);
-        HashSet<TrackSummary> GetPlaylistTracks(List<string> playlistIDs);
+        List<TrackSummary> GetPlaylistTracks(List<string> playlistIDs);
         List<TrackFeatures> GetTrackFeatures(List<TrackSummary> trackList);
     }
 }

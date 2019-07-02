@@ -22,7 +22,8 @@ namespace Repsoitory
         {
             string query = $"users/{username}/playlists";
             JObject playlists = (JObject)Query(requestType.GET, query);
-            return playlists["items"].ToObject<List<Playlist>>();
+            List<Playlist> result = playlists["items"].ToObject<List<Playlist>>();
+            return result;
         }
 
         /// <summary>

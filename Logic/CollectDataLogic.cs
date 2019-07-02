@@ -36,7 +36,7 @@ namespace Logic
                 List<TrackSummary> playlistTracks = _repo.GetTrackList(id);
                 trackSet.AddRange(playlistTracks);
             }
-
+            trackSet = trackSet.GroupBy(x => x.ID).Select(y => y.First()).ToList();
             return trackSet;
         }
 

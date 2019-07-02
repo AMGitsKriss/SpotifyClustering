@@ -6,7 +6,7 @@ namespace DTO
 {
     public class TrackFeatures : TrackSummary
     {
-        public float Dancability { get; set; }
+        public float Danceability { get; set; }
         public float Energy { get; set; }
         public int Key { get; set; }
         public float Loudness { get; set; }

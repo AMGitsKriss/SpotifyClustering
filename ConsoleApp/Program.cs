@@ -13,19 +13,21 @@ namespace ConsoleApp
     class Program
     {
         static List<TrackFeatures> features;
-        static string token = "BQD6YL60sU0nj7mE1PGEkcOTXobNNRgkshwnkVWhVqnST-RQ601TpXsiGqXbgqBRyjTgyD1W_DMak3O7_3kGkgooEl54OQvmRpRgRSNDn5QMQCNLViYH2DSCLnKvPBsvxUZm7_7pdLD_1M7ivoA";
+        static List<TrackFeatures>[] groupedTracks;
+        static string username = "amgitskriss";
+        static string token = "BQCoYqLwMlcwG6AnAtLGRCrS7Q3ws7YO9x9usxHfh7YuuW8gLf9r1hx29CqbO94k593hAEHK6PE6pCtjFoSR1XzwyeoSONYFklvZo1E0RPazMr5liJOhnFpehW08JvRnj9UpTyx-xslD_fO4XM0ykAocMPieNwBvFor1oYx142XyoQzhvpIg0BmgsLdgRQgzOOZ2BvoTAukmdVErvCrKt-HU";
         static void Main(string[] args)
         {
             GetFeatures();
-            ClusterFromCSV();
+            Cluster();
+            SaveNewPlaylists();
         }
 
         static List<TrackFeatures> GetFeatures()
         {
             Console.WriteLine("Hello World!");
             CollectDataLogic logic = new CollectDataLogic("Bearer " + token);
-            string username = "amgitskriss";
-
+            
             List<Playlist> playlists = logic.GetPlaylists(username);
             List<string> filteredPlaylists = playlists.Where(x => x.Name.Contains("iPhone", StringComparison.InvariantCultureIgnoreCase)).Select(x => x.ID).ToList();
 
@@ -38,23 +40,12 @@ namespace ConsoleApp
             return features;
         }
 
-        static void ClusterFromCSV()
+        static void Cluster()
         {
             double[][] observations = new double[features.Count()][];
-            Dictionary<int, string> TrackIndexDict = new Dictionary<int, string>();
             for (int i = 0; i < features.Count(); i++)
             {
-                try
-                {
-                    TrackIndexDict.Add(i, features[i].ID);
                     observations[i] = FeatureFactory.BuildVector(features[i]);
-                }
-                catch (Exception ex)
-                {
-                    // We really need to make sure we're rid of duplicates
-                    throw ex;
-                }
-
             }
 
             int clusterSize = 5;
@@ -63,16 +54,35 @@ namespace ConsoleApp
             KMeansClusterCollection clusters = kmeans.Learn(observations);
             int[] labels = clusters.Decide(observations);
 
-            List<TrackFeatures>[] groupedTracks = new List<TrackFeatures>[clusterSize];
+            groupedTracks = new List<TrackFeatures>[clusterSize];
             for (int i = 0; i < labels.Length; i++)
             {
                 if (groupedTracks[labels[i]] == null) groupedTracks[labels[i]] = new List<TrackFeatures>();
-                groupedTracks[labels[i]].Add(features.Single(x => x.ID.Equals(TrackIndexDict[i])));
+                groupedTracks[labels[i]].Add(features.Single(x => x.ID.Equals(features[i].ID)));
             }
 
+            /*
             for (int i = 0; i < groupedTracks.Length; i++)
             {
                 WriteCSV(groupedTracks[i], @"C:\Users\Kriss\Desktop\spotify_group_"+i+".csv");
+            }
+            */
+        }
+
+        static void SaveNewPlaylists()
+        {
+            PostDataLogic logic = new PostDataLogic("Bearer " + token);
+            for (int i = 0; i < groupedTracks.Length; i++)
+            {
+                Playlist newPlaylist = logic.AddNewPlaylist(username, $"API Test Playlist {i+1}");
+                List<string> trackList = groupedTracks[i].Select(x => x.URI).ToList();
+
+                int batchSize = 100;
+                for (int j = 0; j < trackList.Count; j += batchSize)
+                {
+                    List<string> trackBatch = trackList.GetRange(i, Math.Min(batchSize, trackList.Count - i));
+                    logic.AddTrack(newPlaylist.ID, trackBatch);
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using DTO;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepositoryContracts;
 using System;
@@ -64,6 +65,28 @@ namespace Repsoitory
             }
 
             return tracks;
+        }
+
+        /// <summary>
+        /// Takes a track ID and returns the track features. (danceability, energy, tempo, etc)
+        /// </summary>
+        public Playlist AddNewPlaylist(string username, BasePlaylist request)
+        {
+            string query = $"users/{username}/playlists";
+            JObject playlists = (JObject)Query(requestType.POST, query, JsonConvert.SerializeObject(request));
+            Playlist result = playlists.ToObject<Playlist>();
+            return result;
+        }
+
+        /// <summary>
+        /// Takes a track ID and returns the track features. (danceability, energy, tempo, etc)
+        /// </summary>
+        public bool AddTrack(string playlistID, AddTrackRequest request)
+        {
+            string query = $"playlists/{playlistID}/tracks";
+            JObject playlists = (JObject)Query(requestType.POST, query, JsonConvert.SerializeObject(request));
+            bool result = playlists.HasValues;
+            return result;
         }
     }
 }

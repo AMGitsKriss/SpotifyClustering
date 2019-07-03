@@ -9,5 +9,7 @@ namespace RepositoryContracts
         List<Playlist> GetPlaylists(string username);
         List<TrackSummary> GetTrackList(string playlistID);
         List<TrackFeatures> GetTrackFeatures(List<string> trackIDs);
+        Playlist AddNewPlaylist(string username, BasePlaylist request);
+        bool AddTrack(string playlistID, AddTrackRequest request);
     }
 }

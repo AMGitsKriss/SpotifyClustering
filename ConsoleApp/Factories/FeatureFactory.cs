@@ -38,5 +38,33 @@ namespace ConsoleApp.Factories
 
             return vector;
         }
+
+        public static double[] GenerateWeights(
+            double acousticness = 1,
+            double danceability = 1,
+            double energy = 1,
+            double instrumentalness = 1,
+            double key = 1,
+            double liveness = 1,
+            double loudness = 1,
+            double speechiness = 1,
+            double tempo = 1,
+            double valence = 1
+            )
+        {
+            double[] vector = new double[] {
+                acousticness,
+                danceability,
+                energy,
+                instrumentalness,
+                key,
+                liveness,
+                loudness,
+                speechiness,
+                tempo,
+                valence
+            };
+            return vector;
+        }
     }
 }

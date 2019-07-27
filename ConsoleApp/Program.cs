@@ -1,4 +1,5 @@
 ﻿using Accord.MachineLearning;
+using Accord.Math.Distances;
 using ConsoleApp.Factories;
 using DTO;
 using Logic;
@@ -50,7 +51,9 @@ namespace ConsoleApp
 
             int clusterSize = 5;
 
-            KMeans kmeans = new KMeans(k: clusterSize);
+            KMeans kmeans = new KMeans(k: clusterSize) {
+                Distance = new WeightedSquareEuclidean(FeatureFactory.GenerateWeights(acousticness: 1.1))
+            };
             KMeansClusterCollection clusters = kmeans.Learn(observations);
             int[] labels = clusters.Decide(observations);
 

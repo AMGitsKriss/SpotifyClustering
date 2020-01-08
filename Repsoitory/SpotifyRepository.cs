@@ -21,9 +21,13 @@ namespace Repsoitory
         /// </summary>
         public List<Playlist> GetPlaylists(string username)
         {
-            string query = $"users/{username}/playlists";
-            JObject playlists = (JObject)Query(requestType.GET, query);
-            List<Playlist> result = playlists["items"].ToObject<List<Playlist>>();
+            List<Playlist> result = new List<Playlist>();
+            while (!result.Any() || result.Count % 20 == 0)
+            {
+                string query = $"users/{username}/playlists?limit=20&offset={result.Count}";
+                JObject playlists = (JObject)Query(requestType.GET, query);
+                result.AddRange(playlists["items"].ToObject<List<Playlist>>());
+            }
             return result;
         }
 
@@ -55,9 +59,9 @@ namespace Repsoitory
             List<TrackFeatures> tracks = new List<TrackFeatures>();
             int batchSize = 100;
 
-            for (int i = 0; i < trackIDs.Count; i+= batchSize)
+            for (int i = 0; i < trackIDs.Count; i += batchSize)
             {
-                List<string> trackBatch = trackIDs.GetRange(i, Math.Min(batchSize, trackIDs.Count-i));
+                List<string> trackBatch = trackIDs.GetRange(i, Math.Min(batchSize, trackIDs.Count - i));
                 string query = $"audio-features?ids={string.Join(",", trackBatch)}";
 
                 JObject tempTracks = (JObject)Query(requestType.GET, query);

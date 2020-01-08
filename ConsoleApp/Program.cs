@@ -14,16 +14,15 @@ namespace ConsoleApp
     class Program
     {
         static List<TrackFeatures> features;
-        static List<TrackFeatures>[] groupedTracks;
         static double[][] observations;
         static string username = "amgitskriss";
-        static string token = "BQCoYqLwMlcwG6AnAtLGRCrS7Q3ws7YO9x9usxHfh7YuuW8gLf9r1hx29CqbO94k593hAEHK6PE6pCtjFoSR1XzwyeoSONYFklvZo1E0RPazMr5liJOhnFpehW08JvRnj9UpTyx-xslD_fO4XM0ykAocMPieNwBvFor1oYx142XyoQzhvpIg0BmgsLdgRQgzOOZ2BvoTAukmdVErvCrKt-HU";
+        static string token = "BQDO0JAFGoQAXEhnkbTGy53zVjMTNHSfsi_d1-2bBfq_RRxLFCcA7nBfUOfRwGTxX1bZGIgNExjkGWGtdnrutgHC0R3R7Y9EHb6eHnoNKwm1P1q9qgl-39Ek4Fd8WiTibppte4XbZDI-whYDlQ03FXx_pR8wCrQzxvD7T8mW_g-orRCbJYTL3ebsbXRJNHHalZU5dN1QFZXo69yFSrtCUKOHl7_y-NxoHbT4rdY38XgYwxtC1GXLT8A5l4d8doT0AowoYwOcS0wq3HA";
         static void Main(string[] args)
         {
             GetFeatures();
-            List<KMeans> clusters = Cluster();
-            groupedTracks = FindOptimumClusterCount(clusters);
-            SaveNewPlaylists();
+            List<Cluster> clusters = Cluster(3, 10);
+            Cluster result = FindOptimumClusterCount(clusters);
+            SaveNewPlaylists(result);
         }
 
         static List<TrackFeatures> GetFeatures()
@@ -38,12 +37,12 @@ namespace ConsoleApp
 
             features = logic.GetTrackFeatures(tracks);
 
-            //WriteCSV(features, @"C:\Users\Kriss\Desktop\spotify_features.csv");
+            WriteCSV(features, @"C:\Users\Kriss\Desktop\spotify_features.csv");
 
             return features;
         }
 
-        static List<KMeans> Cluster(int min = 3, int max = 3)
+        static List<Cluster> Cluster(int min = 3, int max = 3)
         {
             observations = new double[features.Count()][];
             for (int i = 0; i < features.Count(); i++)
@@ -51,41 +50,63 @@ namespace ConsoleApp
                 observations[i] = FeatureFactory.BuildVector(features[i]);
             }
 
-            List<KMeans> myList = new List<KMeans>();
+            List<Cluster> myClusters = new List<Cluster>();
             for (int clusterSize = min; clusterSize <= max; clusterSize++)
             {
-                KMeans kmeans = new KMeans(k: clusterSize)
+                Cluster tmpCluster = new Cluster();
+                tmpCluster.Size = clusterSize;
+                tmpCluster.KMeans = new KMeans(k: clusterSize)
                 {
-                    Distance = new WeightedSquareEuclidean(FeatureFactory.GenerateWeights(acousticness: 1.1))
+                    Distance = new WeightedSquareEuclidean(FeatureFactory.GenerateWeights(acousticness: 1.2, speechiness: 1.2, instrumentalness: 1.2, tempo: 0.8, key: 0.8, energy: 1.2))
                 };
-                myList.Add(kmeans);
+                myClusters.Add(tmpCluster);
             }
 
-            return myList;
+            return myClusters;
         }
 
-        private static List<TrackFeatures>[] FindOptimumClusterCount(List<KMeans> clustersList)
+        private static Cluster FindOptimumClusterCount(List<Cluster> clustersList)
         {
-            var kmeans = clustersList.First();
-            int[] labels = kmeans.Learn(observations).Decide(observations);
-
-            groupedTracks = new List<TrackFeatures>[kmeans.Clusters.Count];
-            for (int i = 0; i < labels.Length; i++)
+            foreach (var item in clustersList)
             {
-                if (groupedTracks[labels[i]] == null) groupedTracks[labels[i]] = new List<TrackFeatures>();
-                groupedTracks[labels[i]].Add(features.Single(x => x.ID.Equals(features[i].ID)));
-            }
+                int[] labels = item.KMeans.Learn(observations).Decide(observations);
 
-            return groupedTracks;
+                item.GroupedTracks = new List<TrackFeatures>[item.Size];
+                for (int i = 0; i < labels.Length; i++)
+                {
+                    if (item.GroupedTracks[labels[i]] == null) item.GroupedTracks[labels[i]] = new List<TrackFeatures>();
+                    item.GroupedTracks[labels[i]].Add(features.Single(x => x.ID.Equals(features[i].ID)));
+                }
+            }
+            var err = clustersList.Select(x => x.KMeans.Error).ToList();
+            List<double> diffList = new List<double>();
+            for (int i = 0; i < err.Count-1; i++)
+            {
+                double diff = Math.Abs(err[i]- err[i+1]);
+                diffList.Add(diff);
+            }
+            double avg = diffList.Average();
+            int resultIndex = 0;
+            for (int i = 0; i < diffList.Count; i++)
+            {
+                if (diffList[i] < avg)
+                {
+                    resultIndex = i+1;
+                    break;
+                }
+            }
+            //Derr 
+            // Prev + next - (2 * this)
+            return clustersList[resultIndex];
         }
 
-        static void SaveNewPlaylists()
+        static void SaveNewPlaylists(Cluster cluster)
         {
             PostDataLogic logic = new PostDataLogic("Bearer " + token);
-            for (int i = 0; i < groupedTracks.Length; i++)
+            for (int i = 0; i < cluster.GroupedTracks.Length; i++)
             {
-                Playlist newPlaylist = logic.AddNewPlaylist(username, $"API Test Playlist {i + 1}");
-                List<string> trackList = groupedTracks[i].Select(x => x.URI).ToList();
+                Playlist newPlaylist = logic.AddNewPlaylist(username, $"API Cluster Test {i + 1}");
+                List<string> trackList = cluster.GroupedTracks[i].Select(x => x.URI).ToList();
 
                 int batchSize = 100;
                 for (int j = 0; j < trackList.Count; j += batchSize)

@@ -19,9 +19,9 @@ namespace Repsoitory
         /// <summary>
         /// Takes a Spotify username and fetches the user's playlists.
         /// </summary>
-        public List<Playlist> GetPlaylists(string username)
+        public List<Playlist> GetPlaylists(string username, int offset)
         {
-            string query = $"users/{username}/playlists";
+            string query = $"users/{username}/playlists?limit=20&offset={offset}";
             JObject playlists = (JObject)Query(requestType.GET, query);
             List<Playlist> result = playlists["items"].ToObject<List<Playlist>>();
             return result;
@@ -30,12 +30,11 @@ namespace Repsoitory
         /// <summary>
         /// Accepts a playlist ID and returns a list of tracks.
         /// </summary>
-        public List<TrackSummary> GetTrackList(string playlistID)
+        public List<TrackSummary> GetTrackList(string playlistID, int offset)
         {
-            string query = $"playlists/{playlistID}/tracks";
+            string query = $"playlists/{playlistID}/tracks?limit=100&offset={offset}";
             JObject playlists = (JObject)Query(requestType.GET, query);
 
-            // TODO - Use a dictionary instead.
             Dictionary<string, TrackSummary> results = new Dictionary<string, TrackSummary>();
             foreach (JToken item in playlists["items"])
             {

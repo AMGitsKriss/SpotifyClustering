@@ -19,7 +19,16 @@ namespace Logic
 
         public List<Playlist> GetPlaylists(string username)
         {
-            return _repo.GetPlaylists(username);
+            List<Playlist> results = new List<Playlist>();
+            int previousCount = -1;
+            int offset = 0;
+            while (results.Count != previousCount)
+            {
+                previousCount = results.Count;
+                results.AddRange(_repo.GetPlaylists(username, offset));
+                offset += 20;
+            }
+            return results;
         }
 
         /// <summary>
@@ -33,8 +42,16 @@ namespace Logic
 
             foreach (string id in playlistIDs)
             {
-                List<TrackSummary> playlistTracks = _repo.GetTrackList(id);
-                trackSet.AddRange(playlistTracks);
+                List<TrackSummary> results = new List<TrackSummary>();
+                int previousCount = -1;
+                int offset = 0;
+                while (results.Count != previousCount)
+                {
+                    previousCount = results.Count;
+                    results.AddRange(_repo.GetTrackList(id, offset));
+                    offset += 100;
+                }
+                trackSet.AddRange(results);
             }
             trackSet = trackSet.GroupBy(x => x.ID).Select(y => y.First()).ToList();
             return trackSet;
@@ -48,8 +65,8 @@ namespace Logic
             foreach (var item in result)
             {
                 TrackSummary itemSummary = trackList.First(x => x.ID.Equals(item.ID));
-                item.Name = itemSummary.Name;
-                item.Artist = itemSummary.Artist;
+                item.Name = itemSummary.Name.Replace(",", string.Empty);
+                item.Artist = itemSummary.Artist.Replace(",", string.Empty);
             }
 
             return result;

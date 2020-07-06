@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace DummyRepository
 {
-    public class DumbSpotifyRepository : ISpotifyRepository
+    public class DumbSpotifyRepository 
     {
         private JObject LoadFromFile(string filename)
         {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp.Factories
+namespace PlaylistManager.Factories
 {
     static class FeatureFactory
     {
@@ -28,11 +28,11 @@ namespace ConsoleApp.Factories
                 t.Danceability,
                 t.Energy,
                 t.Instrumentalness,
-                t.Key,
+                (t.Key+1) / 12,
                 t.Liveness,
-                t.Loudness,
+                (t.Loudness+60) / 60,
                 t.Speechiness,
-                t.Tempo,
+                t.Tempo / 200,
                 t.Valence
             };
 

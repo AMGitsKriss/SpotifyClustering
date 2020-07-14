@@ -1,0 +1,23 @@
+﻿@using Website.Extensions
+@model Website.Models.Shared.PostViewModel
+<div class="col-md-6">
+    <h3>Public Information <sub>Anyone can see</sub></h3>
+
+    <partial name="_NoticePanel" model="Model.NoticeSection" />
+
+    @foreach (var item in Model.PublicSections)
+    {
+        <partial name="_PostSectionPanel" model="item" />
+    }
+</div>
+<div class="col-md-6">
+    <div class="btn btn-m btn-icon btn-dark pointer m-l-5 pull-right" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></div>
+    <h3>
+        Private Information <sub>GM Notes</sub>
+    </h3>
+
+    @foreach (var item in Model.PrivateSections)
+    {
+        <partial name="_PostSectionPanel" model="item" />
+    }
+</div>

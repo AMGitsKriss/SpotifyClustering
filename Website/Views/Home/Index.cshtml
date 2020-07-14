@@ -1,0 +1,82 @@
+﻿@using Website.Extensions
+@model Website.Models.Home.HomeViewModel
+<!-- begin breadcrumb -->
+<ol class="breadcrumb float-xl-right">
+    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:;">Library</a></li>
+    <li class="breadcrumb-item active"><a href="javascript:;">Data</a></li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Page Header <small>header small text goes here...</small></h1>
+<!-- end page-header -->
+
+<div class="row">
+    <div class="col-md-4">
+        COL MD 4
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-blue-dark border-0 text-white mb-3">
+            <div class="card-body">
+                <div class="mb-2 text-grey">
+                    <b>Kill Counter</b>
+                    <span class="ml-2"><i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover" data-title="Total sales" data-placement="top" data-content="Net sales (gross sales minus discounts and returns) plus taxes and shipping. Includes orders from all sales channels." data-original-title="" title=""></i></span>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center text-white mb-2">
+                        <div class="widget-img widget-img-xs rounded bg-inverse mr-2 width-40" style="background-image: url(../assets/img/flag/uk.jpg)"></div>
+                        <div class="d-flex w-100">
+                            <div>Barry Scott <small>(Lvl.5)</small></div>
+                            <div class="ml-auto text-grey"><span data-animation="number" data-value="5">5</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center text-white mb-2">
+                        <div class="widget-img widget-img-xs rounded bg-inverse mr-2 width-40" style="background-image: url(../assets/img/flag/uk.jpg)"></div>
+                        <div class="d-flex w-100">
+                            <div>Churk <small>(Lvl.4)</small></div>
+                            <div class="ml-auto text-grey"><span data-animation="number" data-value="4">4</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center text-white mb-2">
+                        <div class="widget-img widget-img-xs rounded bg-inverse mr-2 width-40" style="background-image: url(../assets/img/flag/uk.jpg)"></div>
+                        <div class="d-flex w-100">
+                            <div>Garry <small>(Lvl.4)</small></div>
+                            <div class="ml-auto text-grey"><span data-animation="number" data-value="3">3</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center text-white mb-2">
+                        <div class="widget-img widget-img-xs rounded bg-inverse mr-2 width-40" style="background-image: url(../assets/img/flag/uk.jpg)"></div>
+                        <div class="d-flex w-100">
+                            <div>Bert <small>(Lvl.3)</small></div>
+                            <div class="ml-auto text-grey"><span data-animation="number" data-value="2">2</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center text-white mb-0">
+                        <div class="widget-img widget-img-xs rounded bg-inverse mr-2 width-40" style="background-image: url(../assets/img/flag/uk.jpg)"></div>
+                        <div class="d-flex w-100">
+                            <div>Jardwick Badass Valentine <small>(Lvl.4)</small></div>
+                            <div class="ml-auto text-grey"><span data-animation="number" data-value="2">2</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        @using (Html.BeginPanel("Panel Title Here"))
+        {
+            <ul>
+                <li>Recent game timeline of sessions &amp; who played.</li>
+                <li>List of notifications (both read and unread)</li>
+            </ul>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        COL MD 4
+    </div>
+</div>
+</div>

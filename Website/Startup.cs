@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Website.Helpers;
-using Website.Models.Shared.Factories;
+using System;
+using Repsoitory;
+using Logic;
+using RepositoryContracts;
+using LogicContracts;
 
 namespace Website
 {
@@ -23,24 +23,22 @@ namespace Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
+            services.AddControllersWithViews();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<ModelHandler, ModelHandler>();
-            services.AddScoped<MenuFactory, MenuFactory>();
-
-            services.AddSingleton(ConfigureAutomapper().CreateMapper());
+            services.AddScoped<ISpotifyRepository, SpotifyRepository>();
+            services.AddScoped<ISpotifyLogic, SpotifyLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -49,33 +47,23 @@ namespace Website
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseSession();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                  name: "areas",
-                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Spotify}/{action=Index}/{id?}");
             });
-        }
-
-        private MapperConfiguration ConfigureAutomapper()
-        {
-            MapperConfiguration config = new MapperConfiguration(c => {
-                //c.CreateMap<Repository.Models.PostSection, PostPanel>();
-                //c.CreateMap<RegistrationViewModel, Repository.Models.User>();
-            });
-
-            return config;
         }
     }
 }

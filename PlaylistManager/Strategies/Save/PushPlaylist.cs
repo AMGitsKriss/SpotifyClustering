@@ -9,9 +9,9 @@ namespace PlaylistManager.Strategies.Save
 {
     public class PushPlaylist : ISaveStrategy
     {
-        private PostDataLogic logic;
+        private SpotifyLogic logic;
 
-        public PushPlaylist(PostDataLogic logic)
+        public PushPlaylist(SpotifyLogic logic)
         {
             this.logic = logic;
         }

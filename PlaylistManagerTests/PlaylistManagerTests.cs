@@ -11,13 +11,13 @@ namespace PlaylistManagerTests
         [SetUp]
         public void Setup()
         {
-            apiToken = "BQBEKUkBzXTuKfmbmI-ksL1AmI55pV_vwUc53m9kq6__iTEKZmsjWVr3KqAcu9MNvNVlgqnwClQy5Pop0vysh8pyH9wJJAExtz7bTn1vvsgv5oSMRUbQkM5MZrTxshyRrDL6HpD2wVJJyZpnCMrdH6YAZiW1qLvzPjWGceWYkdIQWiOfAC9j2ev3UQfKNzFpJYuxGu96YxAUZd0fBweqStKAdMq6W0UXAvxyn9gVAuCDP-gRiurshKlmkIq5ZopWbcwjD6i00b1g1vf-nA";
+            apiToken = "BQB1TER5BBLAm0V8kceJ_5KUQKZCdqgMLBWxwgmSoQrHftH6tcUx8DYagnX-GkdzR7CB5MWQ7NeB0v6Vz9FR5epsUee7qmKLlv1_hKwjM_SMnlQPONe43LUz8Mg-gsSJS3FxePxMWaC0U3QfU6byl_JlWbf6z0LfIEUN9XzjWL-5lhxCpXF4IONZsGGg6pYB_tc1WChuGicWzFBv9YTdFuk2fRJf-CsuAknjgBIWR2GqgupzH4OgBX_Jk64h-UORd11BfpptUK7HFmInAIvA";
         }
 
         [Test]
         public void Test()
         {
-            PLM manager = new PLM(apiToken, "amgitskriss", new SaveAsFile());
+            PLM manager = new PLM(apiToken, "amgitskriss", new PushPlaylist(new Logic.SpotifyLogic("Bearer " + apiToken)));
             manager.Organise();
         }
     }

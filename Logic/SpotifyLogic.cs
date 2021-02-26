@@ -1,20 +1,42 @@
 ﻿using DTO;
 using LogicContracts;
+using Microsoft.Extensions.Configuration;
 using RepositoryContracts;
 using Repsoitory;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace Logic
 {
-    public class CollectDataLogic : ICollectDataLogic
+    // TODO - Just call it SpotifyLogic
+    public class SpotifyLogic : ISpotifyLogic
     {
         private ISpotifyRepository _repo;
 
-        public CollectDataLogic(string apiKey)
+        public SpotifyLogic(ISpotifyRepository repo)
         {
-            _repo = new SpotifyRepository(apiKey);
+            _repo = repo;
+        }
+
+        public LoginSession Login(string code)
+        {
+            LoginSession result = new LoginSession();
+
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder();
+            configBuilder.AddJsonFile("appsettings.json");
+            IConfiguration config = configBuilder.Build();
+
+            TokenRequest request = new TokenRequest()
+            {
+                Code = code,
+                ClientID = config["Endpoints:Spotify:ClientID"],
+                ClientSecret = config["Endpoints:Spotify:SecretKey"],
+            };
+            result.Tokens = _repo.GetToken(request);
+            result.User = _repo.GetCurrentUser();
+            return result;
         }
 
         public List<Playlist> GetPlaylists(string username)
@@ -71,6 +93,25 @@ namespace Logic
 
             return result;
 
+        }
+
+        public Playlist AddNewPlaylist(string username, string playlistName)
+        {
+            BasePlaylist request = new BasePlaylist()
+            {
+                Name = playlistName,
+                Public = false
+            };
+            return _repo.AddNewPlaylist(username, request);
+        }
+
+        public bool AddTrack(string playlistID, List<string> uris)
+        {
+            AddTrackRequest request = new AddTrackRequest()
+            {
+                uris = uris
+            };
+            return _repo.AddTrack(playlistID, request);
         }
     }
 }

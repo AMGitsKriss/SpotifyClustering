@@ -4,14 +4,15 @@ using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LogicContracts;
 
 namespace PlaylistManager.Strategies.Save
 {
     public class PushPlaylist : ISaveStrategy
     {
-        private SpotifyLogic logic;
+        private ISpotifyLogic logic;
 
-        public PushPlaylist(SpotifyLogic logic)
+        public PushPlaylist(ISpotifyLogic logic)
         {
             this.logic = logic;
         }

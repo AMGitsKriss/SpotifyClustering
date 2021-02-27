@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\PlaylistManager\PlaylistManager.csproj" />
   </ItemGroup>
 
 </Project>

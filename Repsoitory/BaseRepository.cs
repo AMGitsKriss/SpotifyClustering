@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,37 @@ namespace Repsoitory
 
     public abstract class BaseRepository
     {
-        internal enum requestType { GET, POST, PATCH, DELETE };
-        internal string _host = "https://api.spotify.com/v1/";
+        internal enum RequestType { GET, POST, PATCH, DELETE };
         internal string _apiKey;
+        internal const string _json = "application/json";
+        internal const string _form = "application/x-www-form-urlencoded";
+        internal string _contentType = _json;
+        private IConfiguration _config;
 
-        internal JToken Query(requestType method, string query, string body)
+        public BaseRepository(IConfiguration config)
         {
-            HttpWebResponse response = null;
-            response = MakeRequest(NewRequest(method, _host + query, body));
-            JToken result = ParseResult(response, query);
-            return result;
+            _config = config;
         }
 
-        internal JToken Query(requestType method, string query)
+        private void SetAuthorization(string apiKey)
         {
-            HttpWebResponse response = null;
-            response = MakeRequest(NewRequest(method, _host + query));
-            JToken result = ParseResult(response, query);
+            _apiKey = _apiKey;
+        }
+
+        internal JToken MakeRequest(RequestType method, string uri, string body)
+        {
+            return Query(NewRequest(method, uri, body));
+        }
+
+        internal JToken MakeRequest(RequestType method, string uri)
+        {
+            return Query(NewRequest(method, uri));
+        }
+
+        internal JToken Query(HttpWebRequest request)
+        {
+            HttpWebResponse response = MakeRequest(request);
+            JToken result = ParseResult(response);
             return result;
         }
 
@@ -52,24 +67,23 @@ namespace Repsoitory
         /// <summary>
         /// Make a request without a body.
         /// </summary>
-        internal HttpWebRequest NewRequest(requestType method, string uri)
+        internal HttpWebRequest NewRequest(RequestType method, string uri)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.AutomaticDecompression = DecompressionMethods.GZip;
             request = SetLoginDetails(request);
             request.Method = method.ToString();
-            request.Accept = "application/vnd.api+json";//application/json
+            request.Accept = "application/json";//application/vnd.api+json
             return request;
         }
 
         /// <summary>
         /// Add a body to a request.
         /// </summary>
-        internal HttpWebRequest NewRequest(requestType method, string uri, string body)
+        internal HttpWebRequest NewRequest(RequestType method, string uri, string body)
         {
             HttpWebRequest request = NewRequest(method, uri);
-            request.AutomaticDecompression = DecompressionMethods.GZip;
-            request.ContentType = "application/json";
+            request.ContentType = _contentType;
             request.ContentLength = body.Length;
 
             try
@@ -96,8 +110,16 @@ namespace Repsoitory
             return request;
         }
 
+        static public string EncodeTo64(string toEncode)
+        {
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(toEncode);
 
-        internal JToken ParseResult(HttpWebResponse response, string query)
+            string returnValue = System.Convert.ToBase64String(toEncodeAsBytes);
+
+            return returnValue;
+        }
+
+        internal JToken ParseResult(HttpWebResponse response)
         {
             JToken parsedResults = null;
             if (response == null)
@@ -133,5 +155,9 @@ namespace Repsoitory
         {
             return JsonConvert.SerializeObject(model, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
+    }
+
+    public class Headers
+    {
     }
 }

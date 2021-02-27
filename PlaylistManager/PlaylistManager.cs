@@ -34,7 +34,7 @@ namespace PlaylistManager
 
         private List<TrackFeatures> GetFeatures()
         {
-            CollectDataLogic logic = new CollectDataLogic("Bearer " + apiToken);
+            SpotifyLogic logic = new SpotifyLogic("Bearer " + apiToken);
 
             List<Playlist> playlists = logic.GetPlaylists(username);
             List<string> filteredPlaylists = playlists.Where(x => x.Name.Contains("iPhone", StringComparison.InvariantCultureIgnoreCase)).Select(x => x.ID).ToList();

@@ -43,7 +43,7 @@
                     {
                         <a>
                             <b class="caret"></b>
-                            <i class="material-icons">@item.Icon</i>
+                            <i class="material-icons">@(item.Icon ?? "list")</i>
                             <span>@item.Name</span>
                         </a>
                         <ul class="sub-menu">
@@ -58,7 +58,7 @@
                     else
                     {
                         <a href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
-                            <i class="material-icons">@item.Icon</i>
+                            <i class="material-icons">@(item.Icon ?? "list")</i>
                             <span>@item.Name</span>
                         </a>
                     }

@@ -5,26 +5,42 @@ namespace Website.Models.Shared.Factories
 {
     public class MenuFactory
     {
-        private IActionContextAccessor _actionContext;
-
-        public MenuFactory(IActionContextAccessor actionContext)
-        {
-            _actionContext = actionContext;
-        }
-
-        public MenuViewModel Create()
+        public static MenuViewModel Create()
         {
             MenuViewModel model = new MenuViewModel
             {
                 MenuItems = TieredMenu()
             };
-            
+
             return model;
         }
 
-        private List<MenuItem> TieredMenu()
+        private static List<MenuItem> TieredMenu()
         {
-            return new List<MenuItem>();
+            List<MenuItem> result = new List<MenuItem>();
+
+            result.Add(new MenuItem() { Controller = "home", Action = "index", Name = "Home", Icon = "home" });
+
+            result.Add(new MenuItem()
+            {
+                Name = "Minecraft",
+                Icon = "language",
+                Children = new List<MenuItem>() {
+                    new MenuItem() { Controller = "spotify", Action = "index", Name = "Overviewer"},
+                    new MenuItem() { Controller = "spotify", Action = "index", Name = "Papyri"}
+                }
+            });
+
+            result.Add(new MenuItem()
+            {
+                Name = "Toys",
+                Icon = "favorite",
+                Children = new List<MenuItem>() {
+                    new MenuItem() { Controller = "spotify", Action = "index", Name = "Spotify"}
+                }
+            });
+
+            return result;
         }
     }
 }

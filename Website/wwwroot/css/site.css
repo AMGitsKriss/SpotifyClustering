@@ -16,8 +16,8 @@
 }
 
 form > .panel.panel-inverse input,
-form > .panel.panel-inverse textarea{
-    width:100%;
+form > .panel.panel-inverse textarea {
+    width: 100%;
 }
 
 .bg-none {
@@ -354,9 +354,14 @@ form > .panel.panel-inverse textarea{
     background-color: #FFE6F1;
 }
 
-.content{
+.content {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
+}
+
+#playlists, #track {
+    overflow-y: scroll;
+    max-height: 400px;
 }

@@ -20,6 +20,11 @@ namespace Repsoitory
             _config = config;
         }
 
+        public void SetAuthorization(string apiKey)
+        {
+            _apiKey = apiKey;
+        }
+
         /// <summary>
         /// It's an authorisation code and returns access and refresh tokens to the application.
         /// </summary>
@@ -68,12 +73,12 @@ namespace Repsoitory
         /// <summary>
         /// Takes a Spotify username and fetches the user's playlists.
         /// </summary>
-        public List<Playlist> GetPlaylists(string username, int offset)
+        public List<Playlist> GetPlaylists(string username)
         {
             List<Playlist> result = new List<Playlist>();
             while (!result.Any() || result.Count % 20 == 0)
             {
-                string query = $"users/{username}/playlists?limit=20&offset={result.Count}";
+                string query = $"{_baseUri}/users/{username}/playlists?limit=20&offset={result.Count}";
                 JObject playlists = (JObject)MakeRequest(RequestType.GET, query);
                 result.AddRange(playlists["items"].ToObject<List<Playlist>>());
             }

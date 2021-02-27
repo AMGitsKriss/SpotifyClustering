@@ -9,10 +9,11 @@ namespace RepositoryContracts
         TokenResponse GetToken(TokenRequest request);
         TokenResponse RefreshToken(TokenRequest request);
         User GetCurrentUser();
-        List<Playlist> GetPlaylists(string username, int offset);
+        List<Playlist> GetPlaylists(string username);
         List<TrackSummary> GetTrackList(string playlistID, int offset);
         List<TrackFeatures> GetTrackFeatures(List<string> trackIDs);
         Playlist AddNewPlaylist(string username, BasePlaylist request);
         bool AddTrack(string playlistID, AddTrackRequest request);
+        void SetAuthorization(string v);
     }
 }

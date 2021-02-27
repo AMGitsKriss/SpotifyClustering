@@ -24,11 +24,6 @@ namespace Repsoitory
             _config = config;
         }
 
-        private void SetAuthorization(string apiKey)
-        {
-            _apiKey = _apiKey;
-        }
-
         internal JToken MakeRequest(RequestType method, string uri, string body)
         {
             return Query(NewRequest(method, uri, body));

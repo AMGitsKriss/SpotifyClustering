@@ -1,1 +1,33 @@
-﻿
+﻿@model Website.Models.Spotify.GetPlaylistsViewModel
+
+<h2 class="float-left">Step 2 WOOP</h2>
+<a class="float-right btn btn-primary btn-lg text-white" id="get-playlists">Get Playlists</a>
+
+<div class="clearfix">Retrieve your playlists.</div>
+
+<ul class="border hide">
+    <li>Get a list of all playlists and present as a checkable list</li>
+    <li>Save new access token returned by API</li>
+</ul>
+
+@if (Model != null)
+{
+    <hr />
+
+    <div class="row">
+        <div class="col-6">
+            <ul id="playlists" class="list-group list-group-flush">
+                @foreach (var playlist in Model.Playlists)
+                {
+                    <li class="list-group-item">
+                        <!-- Default checked -->
+                        <div class="checkbox checkbox-css">
+                            <input type="checkbox" id="@playlist.ID" value="@playlist.ID">
+                            <label for="@playlist.ID">@playlist.Name</label>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    }

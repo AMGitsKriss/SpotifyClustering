@@ -15,6 +15,7 @@ namespace Logic
     {
         private ISpotifyRepository _repo;
 
+        // TODO - Automatically get the user data from the session. Manually applying it each time is stupid.
         public SpotifyLogic(ISpotifyRepository repo)
         {
             _repo = repo;
@@ -41,15 +42,7 @@ namespace Logic
 
         public List<Playlist> GetPlaylists(string username)
         {
-            List<Playlist> results = new List<Playlist>();
-            int previousCount = -1;
-            int offset = 0;
-            while (results.Count != previousCount)
-            {
-                previousCount = results.Count;
-                results.AddRange(_repo.GetPlaylists(username, offset));
-                offset += 20;
-            }
+            List<Playlist> results = _repo.GetPlaylists(username);
             return results;
         }
 
@@ -112,6 +105,11 @@ namespace Logic
                 uris = uris
             };
             return _repo.AddTrack(playlistID, request);
+        }
+
+        public void SetUser(LoginSession user)
+        {
+            _repo.SetAuthorization("Bearer " + user.Tokens.AccessToken);
         }
     }
 }

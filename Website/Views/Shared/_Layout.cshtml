@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Color Admin | Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/css/app.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <!-- ================== END BASE JS ================== -->
+</head>
+<body>
+    <!-- begin #page-container -->
+    <div id="page-container">
+
+        <partial name="_Header" />
+
+        <!-- begin #content -->
+        <div id="content" class="content">
+            @RenderBody()
+        </div>
+        <!-- end #content -->
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="material-icons">keyboard_arrow_up</i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    @RenderSection("scripts", required: false)
+    <script>
+    Site.init();
+    </script>
+</body>
+</html>

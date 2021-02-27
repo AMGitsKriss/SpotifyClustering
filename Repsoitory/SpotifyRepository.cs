@@ -1,25 +1,74 @@
 ﻿using DTO;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepositoryContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace Repsoitory
 {
     public class SpotifyRepository : BaseRepository, ISpotifyRepository
     {
+        private string _baseUri = "https://api.spotify.com/v1";
+        private IConfiguration _config;
 
-        public SpotifyRepository(string apiKey)
+        public SpotifyRepository(IConfiguration config) : base (config)
         {
-            _apiKey = apiKey;
+            _config = config;
+        }
+
+        /// <summary>
+        /// It's an authorisation code and returns access and refresh tokens to the application.
+        /// </summary>
+        public TokenResponse GetToken(TokenRequest request)
+        {
+            // TODO - This setting on the content type is messy. Apply it as a strategy.
+            // TODO - We use different authorization methods at different stages. Make a request factory.
+            string query = $"https://accounts.spotify.com/api/token";
+            string body = $"grant_type=authorization_code&code={request.Code}&redirect_uri={HttpUtility.UrlEncode(_config["Endpoints:Spotify:Callback"])}&client_id={request.ClientID}&client_secret={request.ClientSecret}";
+            _contentType = _form;
+            _apiKey = $"Basic {EncodeTo64($"{_config["Endpoints:Spotify:ClientID"]}:{_config["Endpoints:Spotify:SecretKey"]}")}";
+            JObject tokens = (JObject)MakeRequest(RequestType.POST, query, body);
+            _contentType = _json;
+            TokenResponse result = tokens.ToObject<TokenResponse>(); // TODO - Use the resulting data to set the API key and such.
+            _apiKey = $"Bearer {result.AccessToken}";
+            return result;
+        }
+
+        /// <summary>
+        /// It's an authorisation code and returns access and refresh tokens to the application.
+        /// </summary>
+        public TokenResponse RefreshToken(TokenRequest request)
+        {
+            // TODO - This setting on the content type is messy. Apply it as a strategy.
+            string query = $"https://accounts.spotify.com/api/token";
+            string body = $"grant_type=authorization_code&grant_type={request.GrantType}&refresh_token={request.RefreshToken}&client_id={request.ClientID}&client_secret={request.ClientSecret}";
+            _contentType = _form;
+            JObject tokens = (JObject)MakeRequest(RequestType.POST, query, body);
+            _contentType = _json;
+            TokenResponse result = tokens.ToObject<TokenResponse>(); // TODO - Use the resulting data to set the API key and such.
+            _apiKey = result.AccessToken;
+            return result;
         }
 
         /// <summary>
         /// Takes a Spotify username and fetches the user's playlists.
         /// </summary>
-        public List<Playlist> GetPlaylists(string username)
+        public User GetCurrentUser()
+        {
+            string query = $"{_baseUri}/me";
+            JObject playlists = (JObject)MakeRequest(RequestType.GET, query);
+            User result = playlists.ToObject<User>();
+            return result;
+        }
+
+        /// <summary>
+        /// Takes a Spotify username and fetches the user's playlists.
+        /// </summary>
+        public List<Playlist> GetPlaylists(string username, int offset)
         {
             List<Playlist> result = new List<Playlist>();
             while (!result.Any() || result.Count % 20 == 0)
@@ -34,12 +83,11 @@ namespace Repsoitory
         /// <summary>
         /// Accepts a playlist ID and returns a list of tracks.
         /// </summary>
-        public List<TrackSummary> GetTrackList(string playlistID)
+        public List<TrackSummary> GetTrackList(string playlistID, int offset)
         {
-            string query = $"playlists/{playlistID}/tracks";
-            JObject playlists = (JObject)Query(requestType.GET, query);
+            string query = $"{_baseUri}/playlists/{playlistID}/tracks?limit=100&offset={offset}";
+            JObject playlists = (JObject)MakeRequest(RequestType.GET, query);
 
-            // TODO - Use a dictionary instead.
             Dictionary<string, TrackSummary> results = new Dictionary<string, TrackSummary>();
             foreach (JToken item in playlists["items"])
             {
@@ -61,10 +109,10 @@ namespace Repsoitory
 
             for (int i = 0; i < trackIDs.Count; i += batchSize)
             {
-                List<string> trackBatch = trackIDs.GetRange(i, Math.Min(batchSize, trackIDs.Count - i));
-                string query = $"audio-features?ids={string.Join(",", trackBatch)}";
+                List<string> trackBatch = trackIDs.GetRange(i, Math.Min(batchSize, trackIDs.Count-i));
+                string query = $"{_baseUri}/audio-features?ids={string.Join(",", trackBatch)}";
 
-                JObject tempTracks = (JObject)Query(requestType.GET, query);
+                JObject tempTracks = (JObject)MakeRequest(RequestType.GET, query);
                 tracks.AddRange(tempTracks["audio_features"].ToObject<List<TrackFeatures>>());
             }
 
@@ -76,8 +124,8 @@ namespace Repsoitory
         /// </summary>
         public Playlist AddNewPlaylist(string username, BasePlaylist request)
         {
-            string query = $"users/{username}/playlists";
-            JObject playlists = (JObject)Query(requestType.POST, query, JsonConvert.SerializeObject(request));
+            string query = $"{_baseUri}/users/{username}/playlists";
+            JObject playlists = (JObject)MakeRequest(RequestType.POST, query, JsonConvert.SerializeObject(request));
             Playlist result = playlists.ToObject<Playlist>();
             return result;
         }
@@ -87,8 +135,8 @@ namespace Repsoitory
         /// </summary>
         public bool AddTrack(string playlistID, AddTrackRequest request)
         {
-            string query = $"playlists/{playlistID}/tracks";
-            JObject playlists = (JObject)Query(requestType.POST, query, JsonConvert.SerializeObject(request));
+            string query = $"{_baseUri}/playlists/{playlistID}/tracks";
+            JObject playlists = (JObject)MakeRequest(RequestType.POST, query, JsonConvert.SerializeObject(request));
             bool result = playlists.HasValues;
             return result;
         }

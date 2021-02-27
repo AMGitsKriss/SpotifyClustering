@@ -74,7 +74,7 @@ namespace Repsoitory
             while (!result.Any() || result.Count % 20 == 0)
             {
                 string query = $"users/{username}/playlists?limit=20&offset={result.Count}";
-                JObject playlists = (JObject)Query(requestType.GET, query);
+                JObject playlists = (JObject)MakeRequest(RequestType.GET, query);
                 result.AddRange(playlists["items"].ToObject<List<Playlist>>());
             }
             return result;

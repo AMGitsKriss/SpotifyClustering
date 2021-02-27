@@ -7,20 +7,18 @@ using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LogicContracts;
 
 namespace PlaylistManager
 {
-    public class PlaylistManager
+    public class Manager
     {
-        string username;
-        string apiToken;
+        private ISpotifyLogic _logic;
+        private ISaveStrategy saveStrategy;
 
-        ISaveStrategy saveStrategy;
-
-        public PlaylistManager(string apiToken, string username, ISaveStrategy strategy)
+        public Manager(ISpotifyLogic logic, ISaveStrategy strategy)
         {
-            this.apiToken = apiToken;
-            this.username = username;
+            _logic = logic;
             saveStrategy = strategy;
         }
 
@@ -29,19 +27,18 @@ namespace PlaylistManager
             List<TrackFeatures> features = GetFeatures();
             List<Vector> groupedTracks = Cluster(features);
 
-            saveStrategy.Save(features, groupedTracks, username);
+            saveStrategy.Save(features, groupedTracks, "username");
         }
 
         private List<TrackFeatures> GetFeatures()
         {
-            SpotifyLogic logic = new SpotifyLogic("Bearer " + apiToken);
 
-            List<Playlist> playlists = logic.GetPlaylists(username);
-            List<string> filteredPlaylists = playlists.Where(x => x.Name.Contains("iPhone", StringComparison.InvariantCultureIgnoreCase)).Select(x => x.ID).ToList();
+            List<Playlist> playlists = _logic.GetPlaylists("username");
+            List<string> filteredPlaylists = playlists.Where(x => "trackIDs".Contains(x.ID)).Select(x => x.ID).ToList();
 
-            List<TrackSummary> tracks = logic.GetPlaylistTracks(filteredPlaylists).ToList();
+            List<TrackSummary> tracks = _logic.GetPlaylistTracks(filteredPlaylists).ToList();
 
-            List<TrackFeatures> result = logic.GetTrackFeatures(tracks);
+            List<TrackFeatures> result = _logic.GetTrackFeatures(tracks);
 
             return result;
         }

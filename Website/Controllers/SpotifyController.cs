@@ -1,5 +1,4 @@
 ﻿using DTO;
-using Logic;
 using LogicContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +12,12 @@ namespace Website.Controllers
     public class SpotifyController : Controller
     {
         private ISpotifyLogic _logic;
+        private Manager _playlistManager;
 
-        public SpotifyController(ISpotifyLogic logic)
+        public SpotifyController(ISpotifyLogic logic, Manager playlistManager)
         {
             _logic = logic;
+            _playlistManager = playlistManager;
         }
         public IActionResult Index()
         {
@@ -58,10 +59,7 @@ namespace Website.Controllers
         {
             // TODO - Get all the songs and show the options on the screen for 
             var tracks = _logic.GetPlaylistTracks(trackIDs);
-            var saveStrategy = new PushPlaylist(_logic);
-            // TODO - We need to have the PlaylistManger accept a list of track IDs. Not just a username.
-            var manager = new PlaylistManager.PlaylistManager("", UserSession().User.Username, saveStrategy);
-            manager.Organise();
+            _playlistManager.Organise();
             return PartialView(null);
         }
 

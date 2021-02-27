@@ -31,7 +31,7 @@ namespace Website
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<ISpotifyRepository, SpotifyRepository>();
             services.AddScoped<ISpotifyLogic, SpotifyLogic>();

@@ -2,14 +2,43 @@
 @using System.Web;
 @inject IConfiguration Configuration
 
-<ul>
-    <li>Do we already have valid access and refresh tokens? Skip to getting playlists</li>
-    <li>
-        Submit a login request to <a href="https://accounts.spotify.com/authorize?client_id=@Configuration["Endpoints:Spotify:ClientID"]&response_type=code&redirect_uri=@(HttpUtility.UrlEncode(Configuration["Endpoints:Spotify:Callback"]))&scope=user-read-private%20user-read-email"> Spotify </a> to login.
-    </li>
-    <li>Take the returned code and keep it in a session</li>
-    <li>Request access and refresh tokens</li>
-    <li>Store access and refresh tokens in session</li>
-    <li>Get playlists</li>
-    <li>Save new access token trturned by API</li>
-</ul>
+<div class="content border">
+    <h2>Connect to Spotify</h2>
+    <ul>
+        <li>Do we already have valid access and refresh tokens? Skip to getting playlists</li>
+        <li>
+            Submit a login request to <a href="https://accounts.spotify.com/authorize?client_id=@Configuration["Endpoints:Spotify:ClientID"]&response_type=code&redirect_uri=@(HttpUtility.UrlEncode(Configuration["Endpoints:Spotify:Callback"]))&scope=user-read-private%20user-read-email"> Spotify </a> to login.
+        </li>
+        <li>Take the returned code and keep it in a session</li>
+        <li>Request access and refresh tokens</li>
+        <li>Store access and refresh tokens in session</li>
+    </ul>
+</div>
+<div class="content border">
+    <h2>Step 2</h2>
+    <ul>
+        <li>Get a list of all playlists and present as a checkable list</li>
+        <li>Save new access token returned by API</li>
+    </ul>
+</div>
+<div class="content border">
+    <h2>Step 3</h2>
+    <ul>
+        <li>On request, get all the songs in selected playlists.</li>
+        <li>Present complete list of (unique) songs in checkable list, preselected.</li>
+        <li>
+            Add clustering controls to page
+            <ul>
+                <li>Desired playlist count</li>
+                <li>Minimum playlist size</li>
+                <li>Similarity strictness</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="content border">
+    <h2>Step 4</h2>
+    <ul>
+        <li></li>
+    </ul>
+</div>

@@ -5,7 +5,7 @@
 
 <div class="clearfix">Retrieve the tracks from the selected playlists.</div>
 
-<ul class="border hide">
+<ul class="border">
     <li>On request, get all the songs in selected playlists.</li>
     <li>Present complete list of (unique) songs in checkable list, preselected.</li>
     <li>
@@ -22,20 +22,16 @@
 {
     <hr />
 
-    <div class="row">
-        <div class="col-6">
-            <ul id="tracks" class="list-group list-group-flush">
-                @foreach (var track in Model.Tracks)
-                {
-                    <li class="list-group-item">
-                        <!-- Default checked -->
-                        <div class="checkbox checkbox-css">
-                            <input type="checkbox" id="@track.ID" value="@track.ID" checked>
-                            <label for="@track.ID">@track.Name</label>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
+    <div id="tracks" class="row">
+        @foreach (var track in Model.Tracks)
+        {
+            <div class="col-4 list-group-item">
+                <!-- Default checked -->
+                <div class="checkbox checkbox-css">
+                    <input type="checkbox" id="@track.ID" value="@track.ID" checked="checked">
+                    <label for="@track.ID">@track.Name <br /> <i>@track.Artist</i></label>
+                </div>
+            </div>
+        }
     </div>
 }

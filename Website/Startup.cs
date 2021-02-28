@@ -9,7 +9,7 @@ using Logic;
 using RepositoryContracts;
 using LogicContracts;
 using PlaylistManager;
-using PlaylistManager.Strategies.Save;
+using Logic.Save;
 
 namespace Website
 {
@@ -38,7 +38,8 @@ namespace Website
             services.AddScoped<ISpotifyLogic, SpotifyLogic>();
 
             services.AddScoped<ISaveStrategy, PushPlaylist>();
-            services.AddScoped<Manager, Manager>();
+            //services.AddScoped<ISaveStrategy, SaveAsFile>();
+            services.AddScoped<ClusteringManager, ClusteringManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

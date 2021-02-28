@@ -361,7 +361,7 @@ form > .panel.panel-inverse textarea {
     margin-bottom: 10px;
 }
 
-#playlists, #track {
+#playlists, #tracks {
     overflow-y: scroll;
     max-height: 400px;
 }

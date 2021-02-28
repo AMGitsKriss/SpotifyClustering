@@ -5,7 +5,7 @@
 
 <div class="content border">
     <h2 class="float-left">Connect to Spotify</h2>
-    <a class="float-right btn @(Model != null ? "disabled btn-grey" : "btn-primary") btn-lg" href="https://accounts.spotify.com/authorize?client_id=@Configuration["Endpoints:Spotify:ClientID"]&response_type=code&redirect_uri=@(HttpUtility.UrlEncode(Configuration["Endpoints:Spotify:Callback"]))&scope=user-read-private%20user-read-email">Connect</a>
+    <a class="float-right btn @(Model != null ? "disabled btn-grey" : "btn-primary") btn-lg" href="https://accounts.spotify.com/authorize?client_id=@Configuration["Endpoints:Spotify:ClientID"]&response_type=code&redirect_uri=@(HttpUtility.UrlEncode(Configuration["Endpoints:Spotify:Callback"]))&scope=user-read-private%20user-read-email%20playlist-modify-private">Connect</a>
 
     <div class="clearfix">Login via spotify to begin sorting your playlists.</div>
 
@@ -28,21 +28,16 @@
     <partial name="_GetTracks" model="null" />
 </div>
 
-<div class="content border">
-    <h2 class="float-left">Step 4</h2>
-    <div class="float-right btn btn-primary btn-lg"><a>Build Playlists</a></div>
-    <ul class="clearfix border">
-        <li></li>
-    </ul>
+<div id="step-build" class="content border">
+    <partial name="_BuildPlaylists" model="null" />
 </div>
+
 <div class="content border">
-    <h2 class="float-left">Step 5</h2>
-    <div class="float-right btn btn-primary btn-lg"><a>Save Playlists</a></div>
-    <ul class="clearfix border">
-        <li></li>
-    </ul>
+    <partial name="_SavePlaylists" model="null" />
 </div>
 
 <script>
     Spotify.init();
 </script>
+
+<partial name="_RadarChartBodge" />

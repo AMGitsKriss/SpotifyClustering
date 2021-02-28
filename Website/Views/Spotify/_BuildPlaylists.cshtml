@@ -1,0 +1,43 @@
+﻿@model Website.Models.Spotify.BuildPlaylistsViewModel
+
+<h2 class="float-left">Step 4</h2>
+<a class="float-right btn btn-primary btn-lg text-white" id="build-playlists">Build Playlists</a>
+
+<div class="clearfix">Sort the selected tracks into new playlists.</div>
+
+<ul class="border">
+    <li>Submit all the above tracks to the Playlist Manager.</li>
+    <li>Show the results below</li>
+</ul>
+
+@if (Model != null)
+{
+    <hr />
+
+    <div class="row">
+        @foreach (var playlist in Model.Playlists)
+        {
+            <div class="col-4 p-t-15 border">
+                <b>@playlist.Playlist.Name</b>
+                <textarea id="data-@playlist.Playlist.Name" class="hide">
+                name,acousticness,danceability,energy,instrumentalness,key,liveness,loudness,speechiness,tempo,valence
+                @foreach (var item in playlist.FeatureVectors)
+                {
+                    @string.Join(",", item)
+                    @("\n")
+                }
+                </textarea>
+                <div id="chart-@playlist.Playlist.Name"></div>
+                <ul id="playlists" class="list-group list-group-flush">
+                    @foreach (var track in playlist.TrackFeatures)
+                    {
+                        <li class="list-group-item">
+                            @track.Name
+                        </li>
+                    }
+                </ul>
+            </div>
+            <script>showRadar("@playlist.Playlist.Name")</script>
+        }
+    </div>
+}

@@ -5,7 +5,7 @@
 
 <div class="clearfix">Retrieve your playlists.</div>
 
-<ul class="border hide">
+<ul class="border">
     <li>Get a list of all playlists and present as a checkable list</li>
     <li>Save new access token returned by API</li>
 </ul>
@@ -14,20 +14,16 @@
 {
     <hr />
 
-    <div class="row">
-        <div class="col-6">
-            <ul id="playlists" class="list-group list-group-flush">
-                @foreach (var playlist in Model.Playlists)
-                {
-                    <li class="list-group-item">
-                        <!-- Default checked -->
-                        <div class="checkbox checkbox-css">
-                            <input type="checkbox" id="@playlist.ID" value="@playlist.ID">
-                            <label for="@playlist.ID">@playlist.Name</label>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
+    <div id="playlists" class="row">
+        @foreach (var playlist in Model.Playlists)
+        {
+            <div class="col-4 list-group-item">
+                <!-- Default checked -->
+                <div class="checkbox checkbox-css">
+                    <input type="checkbox" id="@playlist.ID" value="@playlist.ID">
+                    <label for="@playlist.ID">@playlist.Name</label>
+                </div>
+            </div>
+        }
     </div>
-    }
+}

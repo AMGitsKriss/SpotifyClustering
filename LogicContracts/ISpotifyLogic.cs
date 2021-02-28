@@ -10,8 +10,6 @@ namespace LogicContracts
         List<Playlist> GetPlaylists(string username);
         List<TrackSummary> GetPlaylistTracks(List<string> playlistIDs);
         List<TrackFeatures> GetTrackFeatures(List<TrackSummary> trackList);
-        Playlist AddNewPlaylist(string username, string playlistName);
-        bool AddTrack(string playlistID, List<string> uris);
         void SetUser(LoginSession user);
     }
 }

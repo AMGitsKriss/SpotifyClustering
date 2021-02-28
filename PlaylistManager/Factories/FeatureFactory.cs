@@ -7,20 +7,7 @@ namespace PlaylistManager.Factories
 {
     static class FeatureFactory
     {
-        public enum VectorLabels
-        {
-            Acousticness = 0,
-            Dancability = 1,
-            Energy = 2,
-            Instrumentalness = 3,
-            Key = 4,
-            Liveness = 5,
-            Loudness = 6,
-            Speechiness = 7,
-            Tempo = 8,
-            Valence = 9
-        }
-
+        // TODO - This is very spotify specific, Probably belongs with helpers or the DTOs
         public static double[] BuildVector(TrackFeatures t)
         {
             double[] vector = new double[] {
@@ -28,7 +15,7 @@ namespace PlaylistManager.Factories
                 t.Danceability,
                 t.Energy,
                 t.Instrumentalness,
-                (t.Key+1) / 12,
+                ((double)t.Key+1.0) / 12.0,
                 t.Liveness,
                 (t.Loudness+60) / 60,
                 t.Speechiness,

@@ -18,8 +18,9 @@
         @foreach (var playlist in Model.Playlists)
         {
             <div class="col-4 p-t-15 border">
-                <b>@playlist.Playlist.Name</b>
-                <textarea id="data-@playlist.Playlist.Name" class="hide">
+                @* TODO - Replace name element with input boxes *@
+                <b>@playlist.Playlist.Name</b><span class="m-l-10">@playlist.TrackFeatures.Count()</span>
+                <textarea id="data-@playlist.Playlist.Name.Replace(" ", "")" class="hide">
                 name,acousticness,danceability,energy,instrumentalness,key,liveness,loudness,speechiness,tempo,valence
                 @foreach (var item in playlist.FeatureVectors)
                 {
@@ -27,17 +28,17 @@
                     @("\n")
                 }
                 </textarea>
-                <div id="chart-@playlist.Playlist.Name"></div>
+                <div id="chart-@playlist.Playlist.Name.Replace(" ", "")"></div>
                 <ul id="playlists" class="list-group list-group-flush">
                     @foreach (var track in playlist.TrackFeatures)
                     {
                         <li class="list-group-item">
-                            @track.Name
+                            @track.Name <br /> <i>@track.Artist</i>
                         </li>
                     }
                 </ul>
             </div>
-            <script>showRadar("@playlist.Playlist.Name")</script>
+            <script>showRadar("@playlist.Playlist.Name.Replace(" ", "")")</script>
         }
     </div>
 }

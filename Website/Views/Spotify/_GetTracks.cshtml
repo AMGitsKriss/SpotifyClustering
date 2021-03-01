@@ -11,15 +11,41 @@
     <li>
         Add clustering controls to page
         <ul>
-            <li>Desired playlist count</li>
-            <li>Minimum playlist size</li>
             <li>Similarity strictness</li>
+            <li>Minimum playlist size</li>
+            <li>What to do with unclustered "Noise" items</li>
         </ul>
     </li>
+    <li>"Reduce similarity strictness" - I seem to have a lot of orchestral and metal in my noise group. Hopefully they'ld pop into their own playlist and any stragglers would end up joining existing playlists without ruining them.</li>
 </ul>
 
 @if (Model != null)
 {
+    <hr />
+
+    <div class="row">
+        <div class="col-4 list-group-item range-container p-t-10 p-b-10">
+            <label for="minimumDistance" class="form-label font-weight-bold">Distance between nodes:</label><span class="m-l-10" for="minimumDistance"></span>
+            <input type="range" class="form-range" min="1" max="100" value="55" id="minimumDistance">
+        </div>
+        <div class="col-4 list-group-item range-container p-t-10 p-b-10">
+            <label for="minimumSize" class="form-label font-weight-bold">Smallest number of songs in a playlist:</label><span class="m-l-10" for="minimumSize"></span>
+            <input type="range" class="form-range no-border" min="5" max="50" value="10" id="minimumSize">
+        </div>
+        <div class="col-4 list-group-item p-t-10 p-b-10">
+            <label for="noiseStrategy" class="form-label font-weight-bold">What to do with tracks that don't fit neatly?</label>
+            <select id="noiseStrategy" class="form-control">
+                <option>Nearest playlist</option>
+                <option>Reduce similarity strictness</option>
+                <option selected>Their own playlist</option>
+                <option>Ignore them</option>
+            </select>
+        </div>
+        <script>
+            Spotify.initClusteringConfig();
+        </script>
+    </div>
+
     <hr />
 
     <div id="tracks" class="row">

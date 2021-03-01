@@ -365,3 +365,24 @@ form > .panel.panel-inverse textarea {
     overflow-y: scroll;
     max-height: 400px;
 }
+
+.form-range {
+    width: 100%;
+    height: 1.5rem;
+    padding: 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #d3d3d3;
+    height: 5px;
+    border-radius: 5px;
+}
+
+.range-container {
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}

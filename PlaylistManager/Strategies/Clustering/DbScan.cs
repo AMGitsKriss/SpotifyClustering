@@ -7,13 +7,13 @@ namespace PlaylistManager.Strategies.Clustering
 {
     class DbScan : IClusteringStrategy
     {
-        public int MinimumClusterSize { get; }
-        public double RequiredRange { get; }
+        private readonly int _minimumClusterSize;
+        private readonly double _maximumDistance;
 
-        public DbScan(int minimumCluserSize, double requiredRange)
+        public DbScan(int minimumCluserSize, double maximumDistance)
         {
-            MinimumClusterSize = minimumCluserSize;
-            RequiredRange = requiredRange;
+            _minimumClusterSize = minimumCluserSize;
+            _maximumDistance = maximumDistance;
         }
 
         public List<Vector> Search(List<Vector> trackList)
@@ -25,7 +25,7 @@ namespace PlaylistManager.Strategies.Clustering
                     continue;
 
                 List<Vector> neighbours = FindNeighbours(trackList, track);
-                if (neighbours.Count(c => c.Cluster <= 0) < MinimumClusterSize)
+                if (neighbours.Count(c => c.Cluster <= 0) < _minimumClusterSize)
                 {
                     track.Cluster = -1;
                     continue;
@@ -39,7 +39,7 @@ namespace PlaylistManager.Strategies.Clustering
                     {
                         neighbour.Cluster = clusters;
                         List<Vector> newNeighbours = FindNeighbours(trackList, neighbour);
-                        if (neighbours.Count(c => c.Cluster <= 0) >= MinimumClusterSize)
+                        if (neighbours.Count(c => c.Cluster <= 0) >= _minimumClusterSize)
                             seedTracks.AddRange(newNeighbours);
                     }
                 }
@@ -53,7 +53,7 @@ namespace PlaylistManager.Strategies.Clustering
             List<Vector> neighbours = new List<Vector>();
             foreach (var compareTrack in trackList)
             {
-                if (GetDistance(currentTrack, compareTrack) <= RequiredRange)
+                if (GetDistance(currentTrack, compareTrack) <= _maximumDistance)
                 {
                     neighbours.Add(compareTrack);
                 }
@@ -71,14 +71,13 @@ namespace PlaylistManager.Strategies.Clustering
             {
                 double dimensionADistance = Math.Abs(distance);
                 double dimensionBDistance = Math.Abs(trackA.Features[i] - trackB.Features[i]);
-                distance = GetHypotenuse(dimensionADistance, dimensionBDistance);
+                distance = CalculateHypotenuse(dimensionADistance, dimensionBDistance);
             }
             return distance;
         }
 
-        public double GetHypotenuse(double a, double b)
+        public double CalculateHypotenuse(double a, double b)
         {
-            // TODO - Make into a Math.Hypotenuse extension method
             return Math.Sqrt((a * a) + (b * b));
         }
     }

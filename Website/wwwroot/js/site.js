@@ -5,6 +5,8 @@
         $(document).on('click', '#get-tracks', getTracks);
         $(document).on('click', '#build-playlists', buildPlaylists);
         $(document).on('click', '#save-playlists', savePlaylists);
+        $(document).on('change', 'input[type=range]', distanceRangeSlider);
+        $(document).on('change', 'input[type=range]', sizeRangeSlider);
     }
 
     function getPlaylists() {
@@ -35,7 +37,11 @@
     }
 
     function buildPlaylists() {
-        var tracks = { trackIDs: [] };
+        var tracks = {
+            trackIDs: [],
+            minimumSize: $('#minimumSize').val(),
+            minimumDistance: $('#minimumDistance').val() / 100
+        };
 
         $('#tracks input:checked').each(function () {
             tracks.trackIDs.push($(this).val());
@@ -61,9 +67,27 @@
         });
     }
 
+    function initClusteringConfig() {
+        distanceRangeSlider();
+        sizeRangeSlider();
+    } 
+
+    function distanceRangeSlider() {
+        var value = $('#minimumDistance').val();
+        $('span[for=minimumDistance]').html(value / 100);
+    }
+
+    function sizeRangeSlider() {
+        var value = $('#minimumSize').val();
+        $('span[for=minimumSize]').html(value);
+    }
+
     return {
         init: function () {
             bindEvents();
+        },
+        initClusteringConfig: function () {
+            initClusteringConfig();
         }
     }
 })();

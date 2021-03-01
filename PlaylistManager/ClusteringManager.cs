@@ -4,15 +4,15 @@ using PlaylistManager.Strategies.Clustering;
 using DTO;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace PlaylistManager
 {
-    // TODO - PlaylistManager should become Clustering
     public class ClusteringManager
     {
         private List<Vector> _featureVectors;
-
-        // TODO - Object: ISortingConfig, minimum cluster size and maximum range should come from a config.
+        private int _minimumClusterSize;
+        private double _minimumDistance;
 
         public void SetDataPool(List<TrackFeatures> features)
         {
@@ -20,10 +20,16 @@ namespace PlaylistManager
             _featureVectors.AddRange(features.Select(f => new Vector() { ID = f.ID, Features = FeatureFactory.BuildVector(f) }));
         }
 
+        public void SetConfigs(int minimumClusterSize, double minimumDistance)
+        {
+            _minimumClusterSize = minimumClusterSize;
+            _minimumDistance = minimumDistance;
+        }
+
         public List<Cluster> FindClusters()
         {
-
-            IClusteringStrategy algorithm = new DbScan(10, 0.55);
+            // TODO - Object: ISortingConfig, minimum cluster size and maximum range should come from a config.
+            IClusteringStrategy algorithm = new DbScan(_minimumClusterSize, _minimumDistance);
             algorithm.Search(_featureVectors);
 
             int clusters = _featureVectors.Max(m => m.Cluster);
@@ -35,6 +41,10 @@ namespace PlaylistManager
             }
 
             List<Cluster> result = new List<Cluster>();
+            result.Add(new Cluster() { 
+                Features = _featureVectors.Where(f => f.Cluster == -1).ToList()
+            });
+
             for (int i = 0; i < clusters; i++)
             {
                 var currentCluster = new Cluster();

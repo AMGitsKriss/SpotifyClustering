@@ -65,7 +65,7 @@ namespace Website.Controllers
         }
 
 
-        public IActionResult BuildPlaylists(List<string> trackIDs)
+        public IActionResult BuildPlaylists(List<string> trackIDs, int minimumSize, double minimumDistance)
         {
             var user = UserSession();
             _logic.SetUser(user);
@@ -74,6 +74,7 @@ namespace Website.Controllers
             var tracks = TrackSession().Where(t => trackIDs.Contains(t.ID)).ToList();
             var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
             _playlistManager.SetDataPool(trackFeatures);
+            _playlistManager.SetConfigs(minimumSize, minimumDistance);
             var result = _playlistManager.FindClusters();
 
             BuildPlaylistsViewModel model = new BuildPlaylistsViewModel()
@@ -95,6 +96,7 @@ namespace Website.Controllers
                     FeatureVectors = filteredFeatures.Select(f => FeatureFactory.BuildVector(f)).ToList()
                 };
                 model.Playlists.Add(pl);
+                model.Playlists[0].Playlist.Name = "Unsorted Noise";
             }
 
             HttpContext.Session.SetString("playlists", JsonConvert.SerializeObject(model));

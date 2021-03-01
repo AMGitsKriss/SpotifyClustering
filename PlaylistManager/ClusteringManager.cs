@@ -27,7 +27,7 @@ namespace PlaylistManager
         public void SetNoisResolutionMethod(INoiseResolutionStrategy noiseResolution)
         {
             if (noiseResolution == null)
-                _noiseResolution = new NearestCluster();
+                _noiseResolution = new FindNearestCluster();
             else
                 _noiseResolution = noiseResolution;
         }

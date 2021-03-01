@@ -70,15 +70,13 @@ namespace Website.Controllers
             var user = UserSession();
             _logic.SetUser(user);
 
-            var test = NoiseStrategyAttribute.GetInstance(request.NoiseStrategy);
-
             var tracks = TrackSession().Where(t => request.TrackIDs.Contains(t.ID)).ToList();
             var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
-
             var featureVectors = trackFeatures.Select(f => new Vector() { ID = f.ID, Features = Builders.FeatureBuilder.BuildVector(f) }).ToList();
-            _playlistManager.SetDataPool(featureVectors);
 
+            _playlistManager.SetDataPool(featureVectors);
             _playlistManager.SetConfigs(request.MinimumSize, request.MinimumDistance);
+            _playlistManager.SetNoisResolutionMethod(NoiseStrategyAttribute.GetInstance(request.NoiseStrategy));
             var result = _playlistManager.FindClusters();
 
             BuildPlaylistsViewModel model = new BuildPlaylistsViewModel()

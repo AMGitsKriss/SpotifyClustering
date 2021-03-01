@@ -35,10 +35,9 @@
         <div class="col-4 list-group-item p-t-10 p-b-10">
             <label for="noiseStrategy" class="form-label font-weight-bold">What to do with tracks that don't fit neatly?</label>
             <select id="noiseStrategy" class="form-control">
-                <option>Nearest playlist</option>
-                <option>Reduce similarity strictness</option>
-                <option selected>Their own playlist</option>
-                <option>Ignore them</option>
+                <option value="Discard">Ignore them</option>
+                <option value="OwnPlaylist" selected>Their own playlist</option>
+                <option value="FindNearestCluster">Nearest playlist</option>
             </select>
         </div>
         <script>

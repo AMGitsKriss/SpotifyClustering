@@ -11,6 +11,7 @@ namespace PlaylistManager
         private List<Vector> _featureVectors;
         private int _minimumClusterSize;
         private double _minimumDistance;
+        private INoiseResolutionStrategy _noiseResolution;
 
         public void SetDataPool(List<Vector> features)
         {
@@ -23,13 +24,20 @@ namespace PlaylistManager
             _minimumDistance = minimumDistance;
         }
 
+        public void SetNoisResolutionMethod(INoiseResolutionStrategy noiseResolution)
+        {
+            if (noiseResolution == null)
+                _noiseResolution = new NearestCluster();
+            else
+                _noiseResolution = noiseResolution;
+        }
+
         public List<Cluster> FindClusters()
         {
             // TODO - Object: ISortingConfig, minimum cluster size and maximum range should come from a config.
             IClusteringStrategy algorithm = new DbScan();
-            INoiseResolutionStrategy noiseResolution = new NearestCluster();
 
-            algorithm.WithConfiguration(_minimumClusterSize, _minimumDistance, noiseResolution);
+            algorithm.WithConfiguration(_minimumClusterSize, _minimumDistance, _noiseResolution);
             algorithm.Search(_featureVectors);
 
             int clusters = _featureVectors.Max(m => m.Cluster);

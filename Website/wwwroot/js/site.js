@@ -40,7 +40,8 @@
         var tracks = {
             trackIDs: [],
             minimumSize: $('#minimumSize').val(),
-            minimumDistance: $('#minimumDistance').val() / 100
+            minimumDistance: $('#minimumDistance').val() / 100,
+            noiseStrategy: $('#noiseStrategy').val()
         };
 
         $('#tracks input:checked').each(function () {

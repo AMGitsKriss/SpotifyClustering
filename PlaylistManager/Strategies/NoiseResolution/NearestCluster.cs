@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace PlaylistManager.Strategies.NoiseResolution
 {
-    class NearestCluster : INoiseResolutionStrategy
+    [NoiseStrategy(NoiseStrategy.FindNearestCluster)]
+    public class NearestCluster : INoiseResolutionStrategy
     {
         public List<Vector> ApplyStrategy(List<Vector> trackList)
         {

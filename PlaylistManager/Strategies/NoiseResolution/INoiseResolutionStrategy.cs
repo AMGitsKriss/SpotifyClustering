@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlaylistManager.Strategies.NoiseResolution
 {
-    interface INoiseResolutionStrategy
+    public interface INoiseResolutionStrategy
     {
         List<Vector> ApplyStrategy(List<Vector> trackList);
     }

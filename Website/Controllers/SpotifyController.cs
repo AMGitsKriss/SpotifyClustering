@@ -65,19 +65,20 @@ namespace Website.Controllers
         }
 
 
-        public IActionResult BuildPlaylists(List<string> trackIDs, int minimumSize, double minimumDistance)
+        public IActionResult BuildPlaylists(BuildPlaylistRequest request)
         {
             var user = UserSession();
             _logic.SetUser(user);
 
-            var test = TrackSession().ToList();
-            var tracks = TrackSession().Where(t => trackIDs.Contains(t.ID)).ToList();
+            var test = NoiseStrategyAttribute.GetInstance(request.NoiseStrategy);
+
+            var tracks = TrackSession().Where(t => request.TrackIDs.Contains(t.ID)).ToList();
             var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
 
             var featureVectors = trackFeatures.Select(f => new Vector() { ID = f.ID, Features = Builders.FeatureBuilder.BuildVector(f) }).ToList();
             _playlistManager.SetDataPool(featureVectors);
 
-            _playlistManager.SetConfigs(minimumSize, minimumDistance);
+            _playlistManager.SetConfigs(request.MinimumSize, request.MinimumDistance);
             var result = _playlistManager.FindClusters();
 
             BuildPlaylistsViewModel model = new BuildPlaylistsViewModel()

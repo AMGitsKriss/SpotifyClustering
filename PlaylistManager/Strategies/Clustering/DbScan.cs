@@ -2,18 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlaylistManager.Models;
+using PlaylistManager.Strategies.NoiseResolution;
 
 namespace PlaylistManager.Strategies.Clustering
 {
     class DbScan : IClusteringStrategy
     {
-        private readonly int _minimumClusterSize;
-        private readonly double _maximumDistance;
+        private int _minimumClusterSize;
+        private double _maximumDistance;
+        private INoiseResolutionStrategy _noiseResolutionStrategy;
 
-        public DbScan(int minimumCluserSize, double maximumDistance)
+        public IClusteringStrategy WithConfiguration(int minimumCluserSize, double maximumDistance, INoiseResolutionStrategy noiseResolutionStrategy)
+        {
+            WithConfiguration(minimumCluserSize, maximumDistance);
+            _noiseResolutionStrategy = noiseResolutionStrategy;
+
+            return this;
+        }
+
+        public IClusteringStrategy WithConfiguration(int minimumCluserSize, double maximumDistance)
         {
             _minimumClusterSize = minimumCluserSize;
             _maximumDistance = maximumDistance;
+
+            return this;
+        }
+
+        public void IncrementSearchDistance(double increment)
+        {
+            _maximumDistance += increment;
         }
 
         public List<Vector> Search(List<Vector> trackList)
@@ -27,7 +44,7 @@ namespace PlaylistManager.Strategies.Clustering
                 List<Vector> neighbours = FindNeighbours(trackList, track);
                 if (neighbours.Count(c => c.Cluster <= 0) < _minimumClusterSize)
                 {
-                    track.Cluster = -1;
+                    track.Cluster = 0;
                     continue;
                 }
                 clusters++;
@@ -44,6 +61,9 @@ namespace PlaylistManager.Strategies.Clustering
                     }
                 }
             }
+
+            if (_noiseResolutionStrategy != null)
+                trackList = _noiseResolutionStrategy.ApplyStrategy(trackList);
 
             return trackList;
         }

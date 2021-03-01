@@ -1,21 +1,18 @@
 ﻿using DTO;
-using DTO.Factories;
 using RepositoryContracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Logic.Save
 {
-    // TODO - Pull all the save functionality out of PlaylistManager. This belongs with the spotify logic
-    public class SaveAsFile : ISaveStrategy
+    public class SaveAsFileLogic : ISavePlaylistLogic
     {
         private ISpotifyRepository _repo;
         private string _username;
 
-        public SaveAsFile(ISpotifyRepository repo)
+        public SaveAsFileLogic(ISpotifyRepository repo)
         {
             _repo = repo;
         }
@@ -27,7 +24,7 @@ namespace Logic.Save
 
         public void Save(IList<TrackFeatures> features, string playlistName)
         {
-            var thing = features.Select(f => FeatureFactory.BuildVector(f));
+            var thing = features.Select(f => BuildCSVRow(f));
             if (thing.Any())
                 WriteCSV(thing, $@"C:\Users\Kriss\Desktop\SPOTIFY\API DbScan Playlist {_username} {playlistName}.csv");
         }
@@ -43,12 +40,6 @@ namespace Logic.Save
             }
         }
 
-        private string Escape(string val)
-        {
-            if (val == null) return null;
-            return val.Replace("\"", "\"\"");
-        }
-
         public Playlist AddNewPlaylist(string username, string playlistName)
         {
             throw new NotImplementedException();
@@ -57,6 +48,25 @@ namespace Logic.Save
         public bool AddTrack(string playlistID, List<string> uris)
         {
             throw new NotImplementedException();
+        }
+
+        private string[] BuildCSVRow(TrackFeatures t)
+        {
+            string[] vector = new string[] {
+                $"{t.Name} - {t.Artist}",
+                t.Acousticness.ToString(),
+                t.Danceability.ToString(),
+                t.Energy.ToString(),
+                t.Instrumentalness.ToString(),
+                (((double)t.Key+1.0) / 12.0).ToString(),
+                t.Liveness.ToString(),
+                ((t.Loudness+60) / 60).ToString(),
+                t.Speechiness.ToString(),
+                (t.Tempo / 200).ToString(),
+                t.Valence.ToString()
+            };
+
+            return vector;
         }
     }
 }

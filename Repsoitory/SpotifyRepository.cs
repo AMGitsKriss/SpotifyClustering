@@ -38,7 +38,7 @@ namespace Repsoitory
             _apiKey = $"Basic {EncodeTo64($"{_config["Endpoints:Spotify:ClientID"]}:{_config["Endpoints:Spotify:SecretKey"]}")}";
             JObject tokens = (JObject)MakeRequest(RequestType.POST, query, body);
             _contentType = _json;
-            TokenResponse result = tokens.ToObject<TokenResponse>(); // TODO - Use the resulting data to set the API key and such.
+            TokenResponse result = tokens.ToObject<TokenResponse>(); 
             _apiKey = $"Bearer {result.AccessToken}";
             return result;
         }
@@ -54,7 +54,7 @@ namespace Repsoitory
             _contentType = _form;
             JObject tokens = (JObject)MakeRequest(RequestType.POST, query, body);
             _contentType = _json;
-            TokenResponse result = tokens.ToObject<TokenResponse>(); // TODO - Use the resulting data to set the API key and such.
+            TokenResponse result = tokens.ToObject<TokenResponse>(); 
             _apiKey = result.AccessToken;
             return result;
         }

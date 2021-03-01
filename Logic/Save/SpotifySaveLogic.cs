@@ -8,13 +8,12 @@ using RepositoryContracts;
 
 namespace Logic.Save
 {
-    // TODO - Pull all the save functionality out of PlaylistManager. This belongs with the spotify logic
-    public class PushPlaylist : ISaveStrategy
+    public class SpotifySaveLogic : ISavePlaylistLogic
     {
         private ISpotifyRepository _repo;
         private string _username;
 
-        public PushPlaylist(ISpotifyRepository repo)
+        public SpotifySaveLogic(ISpotifyRepository repo)
         {
             _repo = repo;
         }

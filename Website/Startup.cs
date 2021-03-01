@@ -35,9 +35,9 @@ namespace Website
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<ISpotifyRepository, SpotifyRepository>();
-            services.AddScoped<ISpotifyLogic, SpotifyLogic>();
+            services.AddScoped<ISpotifyLogic, SpotifyReadLogic>();
 
-            services.AddScoped<ISaveStrategy, PushPlaylist>();
+            services.AddScoped<ISavePlaylistLogic, SpotifySaveLogic>();
             //services.AddScoped<ISaveStrategy, SaveAsFile>();
             services.AddScoped<ClusteringManager, ClusteringManager>();
         }

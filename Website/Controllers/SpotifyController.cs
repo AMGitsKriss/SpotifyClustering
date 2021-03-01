@@ -1,5 +1,5 @@
 ﻿using DTO;
-using DTO.Factories;
+using Logic.Factories;
 using Logic.Save;
 using LogicContracts;
 using Microsoft.AspNetCore.Http;
@@ -17,10 +17,10 @@ namespace Website.Controllers
     public class SpotifyController : Controller
     {
         private ISpotifyLogic _logic;
-        private ISaveStrategy _save;
+        private ISavePlaylistLogic _save;
         private ClusteringManager _playlistManager;
 
-        public SpotifyController(ISpotifyLogic logic, ISaveStrategy save, ClusteringManager playlistManager)
+        public SpotifyController(ISpotifyLogic logic, ISavePlaylistLogic save, ClusteringManager playlistManager)
         {
             _logic = logic;
             _save = save;
@@ -73,7 +73,10 @@ namespace Website.Controllers
             var test = TrackSession().ToList();
             var tracks = TrackSession().Where(t => trackIDs.Contains(t.ID)).ToList();
             var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
-            _playlistManager.SetDataPool(trackFeatures);
+
+            var featureVectors = trackFeatures.Select(f => new Vector() { ID = f.ID, Features = Builders.FeatureBuilder.BuildVector(f) }).ToList();
+            _playlistManager.SetDataPool(featureVectors);
+
             _playlistManager.SetConfigs(minimumSize, minimumDistance);
             var result = _playlistManager.FindClusters();
 
@@ -83,20 +86,22 @@ namespace Website.Controllers
             };
             foreach (var cluster in result)
             {
-                var clusterIDs = cluster.Features.Select(f => f.ID);
-                var clusterTracks = tracks.Where(t => clusterIDs.Contains(t.ID)).ToList();
-                var filteredFeatures = trackFeatures.Where(f => clusterTracks.Select(t => t.ID).Contains(f.ID));
-                PlaylistViewModel pl = new PlaylistViewModel()
+                if (cluster.Features.Any())
                 {
-                    Playlist = new Playlist()
+                    var clusterIDs = cluster.Features.Select(f => f.ID);
+                    var clusterTracks = tracks.Where(t => clusterIDs.Contains(t.ID)).ToList();
+                    var filteredFeatures = trackFeatures.Where(f => clusterTracks.Select(t => t.ID).Contains(f.ID));
+                    PlaylistViewModel pl = new PlaylistViewModel()
                     {
-                        Name = Guid.NewGuid().ToString()
-                    },
-                    TrackFeatures = filteredFeatures.ToList(),
-                    FeatureVectors = filteredFeatures.Select(f => FeatureFactory.BuildVector(f)).ToList()
-                };
-                model.Playlists.Add(pl);
-                model.Playlists[0].Playlist.Name = "Unsorted Noise";
+                        Playlist = new Playlist()
+                        {
+                            Name = Guid.NewGuid().ToString()
+                        },
+                        TrackFeatures = filteredFeatures.ToList(),
+                        FeatureVectors = filteredFeatures.Select(f => Builders.FeatureBuilder.BuildCSVRow(f)).ToList()
+                    };
+                    model.Playlists.Add(pl);
+                }
             }
 
             HttpContext.Session.SetString("playlists", JsonConvert.SerializeObject(model));

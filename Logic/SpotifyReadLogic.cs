@@ -10,13 +10,12 @@ using System.Linq;
 
 namespace Logic
 {
-    // TODO - Just call it SpotifyLogic
-    public class SpotifyLogic : ISpotifyLogic
+    public class SpotifyReadLogic : ISpotifyLogic
     {
         private ISpotifyRepository _repo;
 
         // TODO - Automatically get the user data from the session. Manually applying it each time is stupid.
-        public SpotifyLogic(ISpotifyRepository repo)
+        public SpotifyReadLogic(ISpotifyRepository repo)
         {
             _repo = repo;
         }

@@ -27,7 +27,7 @@ namespace Logic.Save
         public void Save(IList<TrackFeatures> features, string playlistName)
         {
 
-            Playlist newPlaylist = AddNewPlaylist(_username, $"API DbScan Playlist {playlistName}");
+            Playlist newPlaylist = AddNewPlaylist(_username, playlistName);
             List<string> trackList = features.Select(f => f.URI).ToList();
 
             int batchSize = 100;

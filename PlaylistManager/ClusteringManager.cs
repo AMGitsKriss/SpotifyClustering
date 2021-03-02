@@ -53,6 +53,7 @@ namespace PlaylistManager
             for (int i = 0; i < clusters; i++)
             {
                 var currentCluster = new Cluster();
+                currentCluster.ClusterID = i;
                 currentCluster.Features.AddRange(_featureVectors.Where(f => f.Cluster == i).ToList());
                 result.Add(currentCluster);
             }

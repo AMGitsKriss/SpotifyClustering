@@ -13,6 +13,7 @@ namespace Website.Models.Spotify
 
     public class PlaylistViewModel
     {
+        public int ClusterID { get; set; }
         public Playlist Playlist { get; set; }
         public List<TrackFeatures> TrackFeatures { get; set; }
         public List<string[]> FeatureVectors { get; set; }

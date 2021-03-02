@@ -96,6 +96,7 @@ namespace Website.Controllers
                         {
                             Name = Guid.NewGuid().ToString()
                         },
+                        ClusterID = cluster.ClusterID,
                         TrackFeatures = filteredFeatures.ToList(),
                         FeatureVectors = filteredFeatures.Select(f => Builders.FeatureBuilder.BuildCSVRow(f)).ToList()
                     };
@@ -108,17 +109,24 @@ namespace Website.Controllers
             return PartialView("_BuildPlaylists", model);
         }
 
-        public IActionResult SavePlaylists()
+        public IActionResult SavePlaylists(Dictionary<int, string> playListNames)
         {
-            var user = UserSession();
-            _save.SetUser(user);
-
-            var playlists = PlaylistsSession();
-            foreach (var item in playlists.Playlists)
+            try
             {
-                _save.Save(item.TrackFeatures, item.Playlist.Name);
+                var user = UserSession();
+                _save.SetUser(user);
+
+                var playlists = PlaylistsSession();
+                foreach (var item in playlists.Playlists)
+                {
+                    _save.Save(item.TrackFeatures, playListNames[item.ClusterID]);
+                }
+                return PartialView("_SavePlaylists", playListNames);
             }
-            return PartialView("_SavePlaylists", null);
+            catch (Exception)
+            {
+                return PartialView("_SavePlaylists", null);
+            }
         }
 
         private LoginSession UserSession()

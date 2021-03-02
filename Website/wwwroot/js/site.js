@@ -59,9 +59,18 @@
     }
 
     function savePlaylists() {
+        var data = {};
+        $('.playlist-name').each(function () {
+            var id = $(this).attr('data-id')
+            var name = $(this).val()
+            data[id] = name;
+        });
+
+
         $.ajax({
             type: "POST",
             url: "Spotify/SavePlaylists",
+            data: data,
             success: function (result) {
                 $('#step-save').html(result);
             }

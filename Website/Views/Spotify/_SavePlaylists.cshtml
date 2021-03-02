@@ -1,8 +1,24 @@
-﻿<h2 class="float-left">Step 5</h2>
+﻿@model Dictionary<int, string>
+
+<h2 class="float-left">Step 5</h2>
 <a class="float-right btn btn-primary btn-lg text-white" id="save-playlists">Save Playlists</a>
 
-<div class="clearfix">Save these new playlists to Spotify.</div>
 
-<ul class="border">
-    <li></li>
-</ul>
+@if(!Model.Any())
+{
+<div class="clearfix">Save these new playlists to Spotify.</div>
+}
+else if (Model != null)
+{
+    <div class="clearfix">The following playlists were saved:</div>
+    <ul>
+        @foreach (var playlist in Model)
+        {
+            <li>@playlist.Value</li>
+        }
+    </ul>
+}
+else
+{
+    <div class="clearfix">Error: No playlists were saved.</div>
+}

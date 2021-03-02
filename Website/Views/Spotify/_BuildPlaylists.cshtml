@@ -18,8 +18,10 @@
         @foreach (var playlist in Model.Playlists)
         {
             <div class="col-4 p-t-15 border">
-                @* TODO - Replace name element with input boxes *@
-                <b>@playlist.Playlist.Name</b><span class="m-l-10">@playlist.TrackFeatures.Count()</span>
+                <div class="form-group">
+                    <label class="font-weight-bold" for="cluster-@(playlist.ClusterID)">Playlist Name:</label><small class="m-l-10">@playlist.TrackFeatures.Count() tracks</small>
+                    <input class="form-control playlist-name" name="cluster-@(playlist.ClusterID)" data-id="@playlist.ClusterID" value="@playlist.Playlist.Name" />
+                </div>
                 <textarea id="data-@playlist.Playlist.Name.Replace(" ", "")" class="hide">
                 name,acousticness,danceability,energy,instrumentalness,key,liveness,loudness,speechiness,tempo,valence
                 @foreach (var item in playlist.FeatureVectors)

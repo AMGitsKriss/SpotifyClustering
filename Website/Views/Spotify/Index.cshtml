@@ -7,7 +7,14 @@
     <h2 class="float-left">Connect to Spotify</h2>
     <a class="float-right btn @(Model != null ? "disabled btn-grey" : "btn-primary") btn-lg" href="https://accounts.spotify.com/authorize?client_id=@Configuration["Endpoints:Spotify:ClientID"]&response_type=code&redirect_uri=@(HttpUtility.UrlEncode(Configuration["Endpoints:Spotify:Callback"]))&scope=user-read-private%20user-read-email%20playlist-modify-private">Connect</a>
 
-    <div class="clearfix">Login via spotify to begin sorting your playlists.</div>
+    @if (Model != null)
+    {
+        <div class="clearfix">You're already logged in.</div>
+    }
+    else
+    {
+        <div class="clearfix">Login via spotify to begin sorting your playlists.</div>
+    }
 
     <ul class="border hide">
         <li>Do we already have valid access and refresh tokens? Skip to getting playlists</li>

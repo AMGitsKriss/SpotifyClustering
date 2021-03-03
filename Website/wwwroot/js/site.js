@@ -7,6 +7,18 @@
         $(document).on('click', '#save-playlists', savePlaylists);
         $(document).on('change', 'input[type=range]', distanceRangeSlider);
         $(document).on('change', 'input[type=range]', sizeRangeSlider);
+        $(document).on('change', '#step-playlists input[type=checkbox]', recordCheckboxPlaylist);
+        $(document).on('change', '#step-tracks input[type=checkbox]', recordCheckboxTrack);
+    }
+
+    function recordCheckboxPlaylist() {
+        var selected = $(this).is(":checked") == true ? 1 : 0;
+        gtag('send', 'event', 'GetPlaylists', 'checkbox', 'checked', selected);
+    }
+
+    function recordCheckboxTrack() {
+        var selected = $(this).is(":checked") == true ? 1 : 0;
+        gtag('send', 'event', 'GetTracks', 'checkbox', 'checked', selected);
     }
 
     function getPlaylists() {
@@ -15,6 +27,11 @@
             url: "Spotify/GetPlaylists",
             success: function (result) {
                 $('#step-playlists').html(result);
+                gtag('send', 'event', 'GetPlaylists', 'click', 'Success');
+            },
+            error: function () {
+                gtag('send', 'event', 'GetPlaylists', 'click', 'Fail');
+                alert('Something broke. Bother Kriss');
             }
         });
     }
@@ -32,6 +49,11 @@
             data: playlists,
             success: function (result) {
                 $('#step-tracks').html(result);
+                gtag('send', 'event', 'GetTracks', 'click', 'Success');
+            },
+            error: function () {
+                gtag('send', 'event', 'GetTracks', 'click', 'Fail');
+                alert('Something broke. Bother Kriss');
             }
         });
     }
@@ -54,6 +76,11 @@
             data: tracks,
             success: function (result) {
                 $('#step-build').html(result);
+                gtag('send', 'event', 'BuildPlaylists', 'click', 'Success');
+            },
+            error: function () {
+                gtag('send', 'event', 'BuildPlaylists', 'click', 'Fail');
+                alert('Something broke. Bother Kriss');
             }
         });
     }
@@ -73,6 +100,11 @@
             data: data,
             success: function (result) {
                 $('#step-save').html(result);
+                gtag('send', 'event', 'SavePlaylists', 'click', 'Success');
+            },
+            error: function () {
+                gtag('send', 'event', 'SavePlaylists', 'click', 'Success');
+                alert('Something broke. Bother Kriss');
             }
         });
     }

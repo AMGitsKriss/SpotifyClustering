@@ -4,6 +4,7 @@ using Logic.Save;
 using LogicContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlaylistManager;
 using PlaylistManager.Models;
@@ -19,12 +20,14 @@ namespace Website.Controllers
         private ISpotifyLogic _logic;
         private ISavePlaylistLogic _save;
         private ClusteringManager _playlistManager;
+        private ILogger<SpotifyController> _logger;
 
-        public SpotifyController(ISpotifyLogic logic, ISavePlaylistLogic save, ClusteringManager playlistManager)
+        public SpotifyController(ISpotifyLogic logic, ISavePlaylistLogic save, ClusteringManager playlistManager, ILogger<SpotifyController> logger)
         {
             _logic = logic;
             _save = save;
             _playlistManager = playlistManager;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -42,71 +45,96 @@ namespace Website.Controllers
 
         public IActionResult GetPlaylists()
         {
-            var user = UserSession();
-            _logic.SetUser(user);
-            GetPlaylistsViewModel model = new GetPlaylistsViewModel()
+            try
             {
-                Playlists = _logic.GetPlaylists(user.User.Username)
-            };
-            return PartialView("_GetPlaylists", model);
+                var user = UserSession();
+                _logic.SetUser(user);
+                GetPlaylistsViewModel model = new GetPlaylistsViewModel()
+                {
+                    Playlists = _logic.GetPlaylists(user.User.Username)
+                };
+
+                return PartialView("_GetPlaylists", model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Caught in GetPlaylists");
+                return BadRequest();
+            }
         }
 
         public IActionResult GetTracks(List<string> playlistIDs)
         {
-            var user = UserSession();
-            _logic.SetUser(user);
-            var tracks = _logic.GetPlaylistTracks(playlistIDs);
-            HttpContext.Session.SetString("tracks", JsonConvert.SerializeObject(tracks));
-            GetTracksViewModel model = new GetTracksViewModel()
+            try
             {
-                Tracks = tracks
-            };
-            return PartialView("_GetTracks", model);
+                var user = UserSession();
+                _logic.SetUser(user);
+                var tracks = _logic.GetPlaylistTracks(playlistIDs);
+                HttpContext.Session.SetString("tracks", JsonConvert.SerializeObject(tracks));
+                GetTracksViewModel model = new GetTracksViewModel()
+                {
+                    Tracks = tracks
+                };
+                return PartialView("_GetTracks", model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Caught in GetTracks");
+                return BadRequest();
+            }
         }
 
 
         public IActionResult BuildPlaylists(BuildPlaylistRequest request)
         {
-            var user = UserSession();
-            _logic.SetUser(user);
-
-            var tracks = TrackSession().Where(t => request.TrackIDs.Contains(t.ID)).ToList();
-            var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
-            var featureVectors = trackFeatures.Select(f => new Vector() { ID = f.ID, Features = Builders.FeatureBuilder.BuildVector(f) }).ToList();
-
-            _playlistManager.SetDataPool(featureVectors);
-            _playlistManager.SetConfigs(request.MinimumSize, request.MinimumDistance);
-            _playlistManager.SetNoisResolutionMethod(NoiseStrategyAttribute.GetInstance(request.NoiseStrategy));
-            var result = _playlistManager.FindClusters();
-
-            BuildPlaylistsViewModel model = new BuildPlaylistsViewModel()
+            try
             {
-                Playlists = new List<PlaylistViewModel>()
-            };
-            foreach (var cluster in result)
-            {
-                if (cluster.Features.Any())
+                var user = UserSession();
+                _logic.SetUser(user);
+
+                var tracks = TrackSession().Where(t => request.TrackIDs.Contains(t.ID)).ToList();
+                var trackFeatures = _logic.GetTrackFeatures(tracks.ToList());
+                var featureVectors = trackFeatures.Select(f => new Vector() { ID = f.ID, Features = Builders.FeatureBuilder.BuildVector(f) }).ToList();
+
+                _playlistManager.SetDataPool(featureVectors);
+                _playlistManager.SetConfigs(request.MinimumSize, request.MinimumDistance);
+                _playlistManager.SetNoisResolutionMethod(NoiseStrategyAttribute.GetInstance(request.NoiseStrategy));
+                var result = _playlistManager.FindClusters();
+
+                BuildPlaylistsViewModel model = new BuildPlaylistsViewModel()
                 {
-                    var clusterIDs = cluster.Features.Select(f => f.ID);
-                    var clusterTracks = tracks.Where(t => clusterIDs.Contains(t.ID)).ToList();
-                    var filteredFeatures = trackFeatures.Where(f => clusterTracks.Select(t => t.ID).Contains(f.ID));
-                    PlaylistViewModel pl = new PlaylistViewModel()
+                    Playlists = new List<PlaylistViewModel>()
+                };
+                foreach (var cluster in result)
+                {
+                    if (cluster.Features.Any())
                     {
-                        Playlist = new Playlist()
+                        var clusterIDs = cluster.Features.Select(f => f.ID);
+                        var clusterTracks = tracks.Where(t => clusterIDs.Contains(t.ID)).ToList();
+                        var filteredFeatures = trackFeatures.Where(f => clusterTracks.Select(t => t.ID).Contains(f.ID));
+                        PlaylistViewModel pl = new PlaylistViewModel()
                         {
-                            Name = Guid.NewGuid().ToString()
-                        },
-                        ClusterID = cluster.ClusterID,
-                        TrackFeatures = filteredFeatures.ToList(),
-                        FeatureVectors = filteredFeatures.Select(f => Builders.FeatureBuilder.BuildCSVRow(f)).ToList()
-                    };
-                    model.Playlists.Add(pl);
+                            Playlist = new Playlist()
+                            {
+                                Name = Guid.NewGuid().ToString()
+                            },
+                            ClusterID = cluster.ClusterID,
+                            TrackFeatures = filteredFeatures.ToList(),
+                            FeatureVectors = filteredFeatures.Select(f => Builders.FeatureBuilder.BuildCSVRow(f)).ToList()
+                        };
+                        model.Playlists.Add(pl);
+                    }
                 }
+
+                HttpContext.Session.SetString("playlists", JsonConvert.SerializeObject(model));
+
+                return PartialView("_BuildPlaylists", model);
             }
-
-            HttpContext.Session.SetString("playlists", JsonConvert.SerializeObject(model));
-
-            return PartialView("_BuildPlaylists", model);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Caught in BuildPlaylists");
+                return BadRequest();
+            }
         }
 
         public IActionResult SavePlaylists(Dictionary<int, string> playListNames)
@@ -123,9 +151,10 @@ namespace Website.Controllers
                 }
                 return PartialView("_SavePlaylists", playListNames);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return PartialView("_SavePlaylists", null);
+                _logger.LogError(ex, "Caught in SavePlaylists");
+                return BadRequest();
             }
         }
 

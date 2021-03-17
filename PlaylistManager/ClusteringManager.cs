@@ -35,7 +35,7 @@ namespace PlaylistManager
         public List<Cluster> FindClusters()
         {
             // TODO - Object: ISortingConfig, minimum cluster size and maximum range should come from a config.
-            IClusteringStrategy algorithm = new DbScan();
+            IClusteringStrategy algorithm = new DBSCAN();
 
             algorithm.WithConfiguration(_minimumClusterSize, _minimumDistance, _noiseResolution);
             algorithm.Search(_featureVectors);

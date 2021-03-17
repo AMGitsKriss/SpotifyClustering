@@ -78,7 +78,7 @@ namespace Repsoitory
             List<Playlist> result = new List<Playlist>();
             while (!result.Any() || result.Count % 20 == 0)
             {
-                string query = $"{_baseUri}/users/{username}/playlists?limit=20&offset={result.Count}";
+                string query = $"{_baseUri}/me/playlists?limit=20&offset={result.Count}";
                 JObject playlists = (JObject)MakeRequest(RequestType.GET, query);
                 result.AddRange(playlists["items"].ToObject<List<Playlist>>());
             }
@@ -98,7 +98,7 @@ namespace Repsoitory
             {
                 TrackSummary tmp = item["track"].ToObject<TrackSummary>();
                 tmp.Artist = item["track"]["artists"][0]["name"].ToString();
-                results.Add(tmp.ID, tmp);
+                results.TryAdd(tmp.ID, tmp);
             }
 
             return results.Values.ToList();

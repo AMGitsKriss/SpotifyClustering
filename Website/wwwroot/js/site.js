@@ -88,8 +88,8 @@
     function savePlaylists() {
         var data = {};
         $('.playlist-name').each(function () {
-            var id = $(this).attr('data-id')
-            var name = $(this).val()
+            var id = $(this).attr('data-id');
+            var name = $(this).val();
             data[id] = name;
         });
 
@@ -112,7 +112,7 @@
     function initClusteringConfig() {
         distanceRangeSlider();
         sizeRangeSlider();
-    } 
+    }
 
     function distanceRangeSlider() {
         var value = $('#minimumDistance').val();
@@ -131,5 +131,5 @@
         initClusteringConfig: function () {
             initClusteringConfig();
         }
-    }
+    };
 })();

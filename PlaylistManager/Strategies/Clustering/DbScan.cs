@@ -6,7 +6,7 @@ using PlaylistManager.Strategies.NoiseResolution;
 
 namespace PlaylistManager.Strategies.Clustering
 {
-    class DbScan : IClusteringStrategy
+    class DBSCAN : IClusteringStrategy
     {
         private int _minimumClusterSize;
         private double _maximumDistance;
@@ -26,11 +26,6 @@ namespace PlaylistManager.Strategies.Clustering
             _maximumDistance = maximumDistance;
 
             return this;
-        }
-
-        public void IncrementSearchDistance(double increment)
-        {
-            _maximumDistance += increment;
         }
 
         public List<Vector> Search(List<Vector> trackList)
@@ -68,7 +63,7 @@ namespace PlaylistManager.Strategies.Clustering
             return trackList;
         }
 
-        public List<Vector> FindNeighbours(List<Vector> trackList, Vector currentTrack)
+        private List<Vector> FindNeighbours(List<Vector> trackList, Vector currentTrack)
         {
             List<Vector> neighbours = new List<Vector>();
             foreach (var compareTrack in trackList)
@@ -81,7 +76,7 @@ namespace PlaylistManager.Strategies.Clustering
             return neighbours;
         }
 
-        public double GetDistance(Vector trackA, Vector trackB)
+        private double GetDistance(Vector trackA, Vector trackB)
         {
             if (trackA.Features.Length != trackB.Features.Length)
                 throw new ArgumentOutOfRangeException("Vectors must have the same number of features.");
@@ -96,7 +91,7 @@ namespace PlaylistManager.Strategies.Clustering
             return distance;
         }
 
-        public double CalculateHypotenuse(double a, double b)
+        private double CalculateHypotenuse(double a, double b)
         {
             return Math.Sqrt((a * a) + (b * b));
         }
